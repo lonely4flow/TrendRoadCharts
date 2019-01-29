@@ -19,6 +19,7 @@
 		EA78698422002ECC003AC4CF /* TrendRoadChartsSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA78698322002ECC003AC4CF /* TrendRoadChartsSampleUITests.swift */; };
 		EA786995220030A1003AC4CF /* LFTrendCalculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA786994220030A1003AC4CF /* LFTrendCalculate.swift */; };
 		EA786997220030E7003AC4CF /* LFLogTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA786996220030E7003AC4CF /* LFLogTool.swift */; };
+		EA78699A22003697003AC4CF /* LFURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA78699922003697003AC4CF /* LFURLProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		EA78698522002ECC003AC4CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA786994220030A1003AC4CF /* LFTrendCalculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFTrendCalculate.swift; sourceTree = "<group>"; };
 		EA786996220030E7003AC4CF /* LFLogTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFLogTool.swift; sourceTree = "<group>"; };
+		EA78699922003697003AC4CF /* LFURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFURLProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 		EA78696222002ECB003AC4CF /* TrendRoadChartsSample */ = {
 			isa = PBXGroup;
 			children = (
+				EA78699B22003A65003AC4CF /* DataCenter */,
 				EA78696322002ECB003AC4CF /* AppDelegate.swift */,
 				EA78696522002ECB003AC4CF /* ViewController.swift */,
 				EA78696722002ECB003AC4CF /* Main.storyboard */,
@@ -202,6 +205,14 @@
 			children = (
 			);
 			path = Charts;
+			sourceTree = "<group>";
+		};
+		EA78699B22003A65003AC4CF /* DataCenter */ = {
+			isa = PBXGroup;
+			children = (
+				EA78699922003697003AC4CF /* LFURLProtocol.swift */,
+			);
+			path = DataCenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,6 +427,7 @@
 			files = (
 				EA786997220030E7003AC4CF /* LFLogTool.swift in Sources */,
 				EA786995220030A1003AC4CF /* LFTrendCalculate.swift in Sources */,
+				EA78699A22003697003AC4CF /* LFURLProtocol.swift in Sources */,
 				EA78696622002ECB003AC4CF /* ViewController.swift in Sources */,
 				EA78696422002ECB003AC4CF /* AppDelegate.swift in Sources */,
 			);
