@@ -9,5 +9,7 @@
 import UIKit
 
 class LFTrendCalculate: NSObject {
-
+    open class func calculateOmiAndStatictis(){
+        
+    }
 }
