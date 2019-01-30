@@ -1,16 +1,26 @@
 PODS:
   - Alamofire (4.8.0)
+  - Hue (3.0.1)
+  - NVActivityIndicatorView (4.4.1):
+    - NVActivityIndicatorView/Presenter (= 4.4.1)
+  - NVActivityIndicatorView/Presenter (4.4.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.8.0)
+  - Hue
+  - NVActivityIndicatorView
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Hue
+    - NVActivityIndicatorView
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
+  NVActivityIndicatorView: f0a6b0ed2973d9544da268f4eb76696f0a9577b0
 
-PODFILE CHECKSUM: 624a2dc4ff158967210f37e50e4c01a62457d90c
+PODFILE CHECKSUM: 792f29bab71129bfb6df633790976bb8d0ed0915
 
 COCOAPODS: 1.5.3
