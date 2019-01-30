@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
+import Hue
 
 class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,UITableViewDelegate {
 
@@ -14,6 +16,8 @@ class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,U
     @IBOutlet weak var tableView: UITableView!
     var dataList: [[String: Any]] = [[String: Any]]()
     var maxIssuse = 153
+    var activityIndicatorView: NVActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.webview.delegate = self
@@ -21,12 +25,18 @@ class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,U
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "问路图", style: .done, target: self, action: #selector(showRoadCharts))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "走势图", style: .done, target: self, action: #selector(showTrendCharts))
         
-        
+        self.activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: (self.view.bounds.width-100)/2, y: (self.view.bounds.height-100)/2, width: 100, height: 100), type: NVActivityIndicatorType.lineScale, color: UIColor.purple, padding: 20)
+        self.view.addSubview(self.activityIndicatorView)
+        self.activityIndicatorView.startAnimating()
         
         let defaults = UserDefaults.standard
         if let dataList = defaults.object(forKey: "dataList") {
             self.dataList = dataList as! [[String : Any]]
             self.tableView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now()+2.5) {
+                self.activityIndicatorView.stopAnimating()
+            }
+            
         }else{
             self.requestWebData()
         }
@@ -51,6 +61,7 @@ class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,U
             defaults.set(self.dataList, forKey: "dataList")
             defaults.synchronize()
             self.tableView.reloadData()
+            self.activityIndicatorView.stopAnimating()
           return
         }
         let urlString = String(format: "http://www.17500.cn/ssq/details.php?issue=2018%03ld", self.maxIssuse)
