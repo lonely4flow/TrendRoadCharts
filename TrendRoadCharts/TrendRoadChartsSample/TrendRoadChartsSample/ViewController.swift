@@ -51,7 +51,8 @@ class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,U
     // MARK: 展示走势图
     @objc func showTrendCharts()
     {
-        
+        let vc = LTTrendViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     func requestWebData(){
         // 2018 总153期

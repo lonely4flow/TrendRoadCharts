@@ -10,6 +10,8 @@ target 'TrendRoadChartsSample' do
   pod 'NVActivityIndicatorView'
   # hue颜色
   pod 'Hue'
+  # 滚动分页展示
+  pod 'XLPagerTabStrip', '~> 8.1.1'
   # Pods for TrendRoadChartsSample
 
   target 'TrendRoadChartsSampleTests' do

@@ -20,6 +20,10 @@
 		EA786995220030A1003AC4CF /* LFTrendCalculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA786994220030A1003AC4CF /* LFTrendCalculate.swift */; };
 		EA786997220030E7003AC4CF /* LFLogTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA786996220030E7003AC4CF /* LFLogTool.swift */; };
 		EA78699A22003697003AC4CF /* LFURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA78699922003697003AC4CF /* LFURLProtocol.swift */; };
+		EACD3172220185B6003DEA9C /* LFTrendInputParamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD3171220185B6003DEA9C /* LFTrendInputParamModel.swift */; };
+		EACD317422019EC0003DEA9C /* Array+LFTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD317322019EC0003DEA9C /* Array+LFTool.swift */; };
+		EACD31772201B2C3003DEA9C /* LFNumTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD31762201B2C3003DEA9C /* LFNumTrendViewController.swift */; };
+		EACD31792201B308003DEA9C /* LTTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD31782201B308003DEA9C /* LTTrendViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,10 @@
 		EA786994220030A1003AC4CF /* LFTrendCalculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFTrendCalculate.swift; sourceTree = "<group>"; };
 		EA786996220030E7003AC4CF /* LFLogTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFLogTool.swift; sourceTree = "<group>"; };
 		EA78699922003697003AC4CF /* LFURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFURLProtocol.swift; sourceTree = "<group>"; };
+		EACD3171220185B6003DEA9C /* LFTrendInputParamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFTrendInputParamModel.swift; sourceTree = "<group>"; };
+		EACD317322019EC0003DEA9C /* Array+LFTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+LFTool.swift"; sourceTree = "<group>"; };
+		EACD31762201B2C3003DEA9C /* LFNumTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFNumTrendViewController.swift; sourceTree = "<group>"; };
+		EACD31782201B308003DEA9C /* LTTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTTrendViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +155,7 @@
 				EA78699B22003A65003AC4CF /* DataCenter */,
 				EA78696322002ECB003AC4CF /* AppDelegate.swift */,
 				EA78696522002ECB003AC4CF /* ViewController.swift */,
+				EACD31782201B308003DEA9C /* LTTrendViewController.swift */,
 				EA78696722002ECB003AC4CF /* Main.storyboard */,
 				EA78696A22002ECC003AC4CF /* Assets.xcassets */,
 				EA78696C22002ECC003AC4CF /* LaunchScreen.storyboard */,
@@ -188,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				EA786994220030A1003AC4CF /* LFTrendCalculate.swift */,
+				EACD3171220185B6003DEA9C /* LFTrendInputParamModel.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -196,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				EA786996220030E7003AC4CF /* LFLogTool.swift */,
+				EACD317322019EC0003DEA9C /* Array+LFTool.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -203,6 +214,7 @@
 		EA7869982200314E003AC4CF /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				EACD31752201B29B003DEA9C /* Trend */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -213,6 +225,14 @@
 				EA78699922003697003AC4CF /* LFURLProtocol.swift */,
 			);
 			path = DataCenter;
+			sourceTree = "<group>";
+		};
+		EACD31752201B29B003DEA9C /* Trend */ = {
+			isa = PBXGroup;
+			children = (
+				EACD31762201B2C3003DEA9C /* LFNumTrendViewController.swift */,
+			);
+			path = Trend;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -410,12 +430,14 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -429,11 +451,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EACD31792201B308003DEA9C /* LTTrendViewController.swift in Sources */,
+				EACD3172220185B6003DEA9C /* LFTrendInputParamModel.swift in Sources */,
 				EA786997220030E7003AC4CF /* LFLogTool.swift in Sources */,
 				EA786995220030A1003AC4CF /* LFTrendCalculate.swift in Sources */,
 				EA78699A22003697003AC4CF /* LFURLProtocol.swift in Sources */,
 				EA78696622002ECB003AC4CF /* ViewController.swift in Sources */,
 				EA78696422002ECB003AC4CF /* AppDelegate.swift in Sources */,
+				EACD317422019EC0003DEA9C /* Array+LFTool.swift in Sources */,
+				EACD31772201B2C3003DEA9C /* LFNumTrendViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
