@@ -10,6 +10,22 @@
 		28F5F9BB2AEC1B78FA528D36 /* Pods_TrendRoadChartsSampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C72B45FEA46EA271C8434472 /* Pods_TrendRoadChartsSampleTests.framework */; };
 		A335501533996BC574D3DFAC /* Pods_TrendRoadChartsSampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CD13907EF01EB0C99B8E56 /* Pods_TrendRoadChartsSampleUITests.framework */; };
 		AF90D4DB53F95A343928CF2E /* Pods_TrendRoadChartsSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A33D56CAA1F0CB23C0BB0C11 /* Pods_TrendRoadChartsSample.framework */; };
+		EA5A3D5B22028F8D0093B886 /* DNSPageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D5222028F8D0093B886 /* DNSPageContentView.swift */; };
+		EA5A3D5C22028F8D0093B886 /* DNSPageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D5322028F8D0093B886 /* DNSPageHelper.swift */; };
+		EA5A3D5D22028F8D0093B886 /* DNSPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D5522028F8D0093B886 /* DNSPageView.swift */; };
+		EA5A3D5E22028F8D0093B886 /* DNSPageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D5622028F8D0093B886 /* DNSPageTitleView.swift */; };
+		EA5A3D5F22028F8D0093B886 /* DNSPageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D5722028F8D0093B886 /* DNSPageViewManager.swift */; };
+		EA5A3D6022028F8D0093B886 /* DNSPageCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D5822028F8D0093B886 /* DNSPageCollectionViewFlowLayout.swift */; };
+		EA5A3D6122028F8D0093B886 /* DNSPageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D5922028F8D0093B886 /* DNSPageStyle.swift */; };
+		EA5A3D64220290250093B886 /* UIColor+LFTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D63220290250093B886 /* UIColor+LFTool.swift */; };
+		EA5A3D672202B2D60093B886 /* OpenResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D662202B2D60093B886 /* OpenResultViewController.swift */; };
+		EA5A3D692202B30C0093B886 /* LFColdHotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D682202B30C0093B886 /* LFColdHotViewController.swift */; };
+		EA5A3D6C2202C2FF0093B886 /* TwoColorOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D6A2202C2FF0093B886 /* TwoColorOpenTableViewCell.swift */; };
+		EA5A3D6D2202C2FF0093B886 /* TwoColorOpenTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA5A3D6B2202C2FF0093B886 /* TwoColorOpenTableViewCell.xib */; };
+		EA5A3D6F2202D0E10093B886 /* LFTrendNumLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D6E2202D0E10093B886 /* LFTrendNumLayout.swift */; };
+		EA5A3D722202D21F0093B886 /* LFNumTrendIssuseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D702202D21F0093B886 /* LFNumTrendIssuseTableViewCell.swift */; };
+		EA5A3D732202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA5A3D712202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib */; };
+		EA5A3D752202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D742202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift */; };
 		EA78696422002ECB003AC4CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA78696322002ECB003AC4CF /* AppDelegate.swift */; };
 		EA78696622002ECB003AC4CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA78696522002ECB003AC4CF /* ViewController.swift */; };
 		EA78696922002ECB003AC4CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA78696722002ECB003AC4CF /* Main.storyboard */; };
@@ -23,7 +39,7 @@
 		EACD3172220185B6003DEA9C /* LFTrendInputParamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD3171220185B6003DEA9C /* LFTrendInputParamModel.swift */; };
 		EACD317422019EC0003DEA9C /* Array+LFTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD317322019EC0003DEA9C /* Array+LFTool.swift */; };
 		EACD31772201B2C3003DEA9C /* LFNumTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD31762201B2C3003DEA9C /* LFNumTrendViewController.swift */; };
-		EACD31792201B308003DEA9C /* LTTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD31782201B308003DEA9C /* LTTrendViewController.swift */; };
+		EACD31792201B308003DEA9C /* TrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD31782201B308003DEA9C /* TrendViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +69,24 @@
 		C72B45FEA46EA271C8434472 /* Pods_TrendRoadChartsSampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrendRoadChartsSampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D620592FE6473A5E6F2E706B /* Pods-TrendRoadChartsSampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrendRoadChartsSampleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrendRoadChartsSampleUITests/Pods-TrendRoadChartsSampleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E763249E5B8FC2C9516A2CF8 /* Pods-TrendRoadChartsSampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrendRoadChartsSampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrendRoadChartsSampleTests/Pods-TrendRoadChartsSampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EA5A3D5222028F8D0093B886 /* DNSPageContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageContentView.swift; sourceTree = "<group>"; };
+		EA5A3D5322028F8D0093B886 /* DNSPageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageHelper.swift; sourceTree = "<group>"; };
+		EA5A3D5422028F8D0093B886 /* DNSPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNSPageView.h; sourceTree = "<group>"; };
+		EA5A3D5522028F8D0093B886 /* DNSPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageView.swift; sourceTree = "<group>"; };
+		EA5A3D5622028F8D0093B886 /* DNSPageTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageTitleView.swift; sourceTree = "<group>"; };
+		EA5A3D5722028F8D0093B886 /* DNSPageViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageViewManager.swift; sourceTree = "<group>"; };
+		EA5A3D5822028F8D0093B886 /* DNSPageCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		EA5A3D5922028F8D0093B886 /* DNSPageStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageStyle.swift; sourceTree = "<group>"; };
+		EA5A3D5A22028F8D0093B886 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA5A3D63220290250093B886 /* UIColor+LFTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+LFTool.swift"; sourceTree = "<group>"; };
+		EA5A3D662202B2D60093B886 /* OpenResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenResultViewController.swift; sourceTree = "<group>"; };
+		EA5A3D682202B30C0093B886 /* LFColdHotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFColdHotViewController.swift; sourceTree = "<group>"; };
+		EA5A3D6A2202C2FF0093B886 /* TwoColorOpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoColorOpenTableViewCell.swift; sourceTree = "<group>"; };
+		EA5A3D6B2202C2FF0093B886 /* TwoColorOpenTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoColorOpenTableViewCell.xib; sourceTree = "<group>"; };
+		EA5A3D6E2202D0E10093B886 /* LFTrendNumLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFTrendNumLayout.swift; sourceTree = "<group>"; };
+		EA5A3D702202D21F0093B886 /* LFNumTrendIssuseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFNumTrendIssuseTableViewCell.swift; sourceTree = "<group>"; };
+		EA5A3D712202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFNumTrendIssuseTableViewCell.xib; sourceTree = "<group>"; };
+		EA5A3D742202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFTrendNumItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		EA78696022002ECB003AC4CF /* TrendRoadChartsSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrendRoadChartsSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA78696322002ECB003AC4CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA78696522002ECB003AC4CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,7 +106,7 @@
 		EACD3171220185B6003DEA9C /* LFTrendInputParamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFTrendInputParamModel.swift; sourceTree = "<group>"; };
 		EACD317322019EC0003DEA9C /* Array+LFTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+LFTool.swift"; sourceTree = "<group>"; };
 		EACD31762201B2C3003DEA9C /* LFNumTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFNumTrendViewController.swift; sourceTree = "<group>"; };
-		EACD31782201B308003DEA9C /* LTTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTTrendViewController.swift; sourceTree = "<group>"; };
+		EACD31782201B308003DEA9C /* TrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +160,41 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		EA5A3D5022028F5C0093B886 /* Vendar */ = {
+			isa = PBXGroup;
+			children = (
+				EA5A3D5122028F8D0093B886 /* DNSPageView */,
+			);
+			path = Vendar;
+			sourceTree = "<group>";
+		};
+		EA5A3D5122028F8D0093B886 /* DNSPageView */ = {
+			isa = PBXGroup;
+			children = (
+				EA5A3D5222028F8D0093B886 /* DNSPageContentView.swift */,
+				EA5A3D5322028F8D0093B886 /* DNSPageHelper.swift */,
+				EA5A3D5422028F8D0093B886 /* DNSPageView.h */,
+				EA5A3D5522028F8D0093B886 /* DNSPageView.swift */,
+				EA5A3D5622028F8D0093B886 /* DNSPageTitleView.swift */,
+				EA5A3D5722028F8D0093B886 /* DNSPageViewManager.swift */,
+				EA5A3D5822028F8D0093B886 /* DNSPageCollectionViewFlowLayout.swift */,
+				EA5A3D5922028F8D0093B886 /* DNSPageStyle.swift */,
+				EA5A3D5A22028F8D0093B886 /* Info.plist */,
+			);
+			path = DNSPageView;
+			sourceTree = "<group>";
+		};
+		EA5A3D652202B2A90093B886 /* Trend */ = {
+			isa = PBXGroup;
+			children = (
+				EACD31782201B308003DEA9C /* TrendViewController.swift */,
+				EA5A3D662202B2D60093B886 /* OpenResultViewController.swift */,
+				EA5A3D6A2202C2FF0093B886 /* TwoColorOpenTableViewCell.swift */,
+				EA5A3D6B2202C2FF0093B886 /* TwoColorOpenTableViewCell.xib */,
+			);
+			path = Trend;
+			sourceTree = "<group>";
+		};
 		EA78695722002ECB003AC4CF = {
 			isa = PBXGroup;
 			children = (
@@ -152,10 +221,11 @@
 		EA78696222002ECB003AC4CF /* TrendRoadChartsSample */ = {
 			isa = PBXGroup;
 			children = (
+				EA5A3D652202B2A90093B886 /* Trend */,
+				EA5A3D5022028F5C0093B886 /* Vendar */,
 				EA78699B22003A65003AC4CF /* DataCenter */,
 				EA78696322002ECB003AC4CF /* AppDelegate.swift */,
 				EA78696522002ECB003AC4CF /* ViewController.swift */,
-				EACD31782201B308003DEA9C /* LTTrendViewController.swift */,
 				EA78696722002ECB003AC4CF /* Main.storyboard */,
 				EA78696A22002ECC003AC4CF /* Assets.xcassets */,
 				EA78696C22002ECC003AC4CF /* LaunchScreen.storyboard */,
@@ -207,6 +277,7 @@
 			children = (
 				EA786996220030E7003AC4CF /* LFLogTool.swift */,
 				EACD317322019EC0003DEA9C /* Array+LFTool.swift */,
+				EA5A3D63220290250093B886 /* UIColor+LFTool.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -231,6 +302,11 @@
 			isa = PBXGroup;
 			children = (
 				EACD31762201B2C3003DEA9C /* LFNumTrendViewController.swift */,
+				EA5A3D682202B30C0093B886 /* LFColdHotViewController.swift */,
+				EA5A3D6E2202D0E10093B886 /* LFTrendNumLayout.swift */,
+				EA5A3D702202D21F0093B886 /* LFNumTrendIssuseTableViewCell.swift */,
+				EA5A3D712202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib */,
+				EA5A3D742202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift */,
 			);
 			path = Trend;
 			sourceTree = "<group>";
@@ -343,9 +419,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA5A3D6D2202C2FF0093B886 /* TwoColorOpenTableViewCell.xib in Resources */,
 				EA78696E22002ECC003AC4CF /* LaunchScreen.storyboard in Resources */,
 				EA78696B22002ECC003AC4CF /* Assets.xcassets in Resources */,
 				EA78696922002ECB003AC4CF /* Main.storyboard in Resources */,
+				EA5A3D732202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,14 +508,18 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
-				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -451,14 +533,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EACD31792201B308003DEA9C /* LTTrendViewController.swift in Sources */,
+				EA5A3D6122028F8D0093B886 /* DNSPageStyle.swift in Sources */,
+				EACD31792201B308003DEA9C /* TrendViewController.swift in Sources */,
+				EA5A3D5F22028F8D0093B886 /* DNSPageViewManager.swift in Sources */,
 				EACD3172220185B6003DEA9C /* LFTrendInputParamModel.swift in Sources */,
+				EA5A3D752202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift in Sources */,
+				EA5A3D6C2202C2FF0093B886 /* TwoColorOpenTableViewCell.swift in Sources */,
+				EA5A3D5E22028F8D0093B886 /* DNSPageTitleView.swift in Sources */,
 				EA786997220030E7003AC4CF /* LFLogTool.swift in Sources */,
+				EA5A3D5B22028F8D0093B886 /* DNSPageContentView.swift in Sources */,
+				EA5A3D64220290250093B886 /* UIColor+LFTool.swift in Sources */,
 				EA786995220030A1003AC4CF /* LFTrendCalculate.swift in Sources */,
+				EA5A3D722202D21F0093B886 /* LFNumTrendIssuseTableViewCell.swift in Sources */,
+				EA5A3D5D22028F8D0093B886 /* DNSPageView.swift in Sources */,
 				EA78699A22003697003AC4CF /* LFURLProtocol.swift in Sources */,
+				EA5A3D692202B30C0093B886 /* LFColdHotViewController.swift in Sources */,
 				EA78696622002ECB003AC4CF /* ViewController.swift in Sources */,
+				EA5A3D5C22028F8D0093B886 /* DNSPageHelper.swift in Sources */,
+				EA5A3D6022028F8D0093B886 /* DNSPageCollectionViewFlowLayout.swift in Sources */,
 				EA78696422002ECB003AC4CF /* AppDelegate.swift in Sources */,
+				EA5A3D672202B2D60093B886 /* OpenResultViewController.swift in Sources */,
 				EACD317422019EC0003DEA9C /* Array+LFTool.swift in Sources */,
+				EA5A3D6F2202D0E10093B886 /* LFTrendNumLayout.swift in Sources */,
 				EACD31772201B2C3003DEA9C /* LFNumTrendViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

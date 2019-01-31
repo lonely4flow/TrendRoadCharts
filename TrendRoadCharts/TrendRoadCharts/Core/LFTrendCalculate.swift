@@ -20,7 +20,10 @@ class LFTrendCalculate: NSObject {
         DispatchQueue.global(qos: .userInitiated).async {
             // 遗漏部分的数据
             let omiList: [LFTrendOutputOmiRowModel] = inputList.map({ (inputModel: LFTrendInputParamModel) -> LFTrendOutputOmiRowModel in
-                return LFTrendOutputOmiRowModel()
+                let omiRowModel = LFTrendOutputOmiRowModel()
+                omiRowModel.isWaitOpen = inputModel.isWaitOpen
+                omiRowModel.orginObj = inputModel.orginObj
+                return omiRowModel
             })
             // 统计部分的数据
             var statisticsList: [LFTrendOutputStatisticsItemModel] = []

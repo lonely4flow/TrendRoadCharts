@@ -51,7 +51,8 @@ class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,U
     // MARK: 展示走势图
     @objc func showTrendCharts()
     {
-        let vc = LTTrendViewController()
+        let vc = TrendViewController()
+        vc.dataList = self.dataList
         self.navigationController?.pushViewController(vc, animated: true)
     }
     func requestWebData(){
@@ -104,7 +105,7 @@ class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,U
                 var issuse = htmlTxt.suffix(from: issuseRange.lowerBound)
                 issuse = issuse.prefix("“双色球”第2019012".count)
                 issuse = issuse.suffix("2019012".count)
-                dict["index"] = issuse
+                dict["index"] = String(issuse)
             }
             // 开奖号
             if let numsRange = htmlTxt.range(of:"出球顺序：") {
@@ -112,8 +113,9 @@ class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,U
                 nums = nums.prefix("出球顺序：15 05 18 13 26 09 + 05".count)
                 nums = nums.suffix("15 05 18 13 26 09 + 05".count)
                 let tempNums = nums.replacingOccurrences(of: " + ", with: " ").components(separatedBy: " ").joined(separator: ",")
-                nums = tempNums.prefix(tempNums.count)
-                dict["nums"] = nums
+                // Could not cast value of type 'Swift.Substring' (0x10733d270) to 'Swift.String'
+                //nums = String(tempNums.prefix(tempNums.count))
+                dict["nums"] = tempNums
             }
             self.dataList.append(dict)
             self .requestWebData()
