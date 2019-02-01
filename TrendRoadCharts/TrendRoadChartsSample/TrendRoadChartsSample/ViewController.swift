@@ -2,13 +2,14 @@
 //  ViewController.swift
 //  TrendRoadChartsSample
 //
-//  Created by 娜娜子 on 29/01/2019.
+//  Created by LonelyFlow on 29/01/2019.
 //  Copyright © 2019 Lonely traveller. All rights reserved.
 //
 
 import UIKit
 import NVActivityIndicatorView
 import Hue
+import SWXMLHash
 
 class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,UITableViewDelegate {
 
@@ -36,11 +37,10 @@ class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,U
             DispatchQueue.main.asyncAfter(deadline: .now()+2.5) {
                 self.activityIndicatorView.stopAnimating()
             }
-            
         }else{
             self.requestWebData()
         }
-       
+       //self.requestWebData()
         
     }
     // MARK: 展示问路图
@@ -57,16 +57,18 @@ class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,U
     }
     func requestWebData(){
         // 2018 总153期
-        if self.maxIssuse <= 0
-        {
-            let defaults = UserDefaults.standard
-            defaults.set(self.dataList, forKey: "dataList")
-            defaults.synchronize()
-            self.tableView.reloadData()
-            self.activityIndicatorView.stopAnimating()
-          return
-        }
-        let urlString = String(format: "http://www.17500.cn/ssq/details.php?issue=2018%03ld", self.maxIssuse)
+//        if self.maxIssuse <= 0
+//        {
+//            let defaults = UserDefaults.standard
+//            defaults.set(self.dataList, forKey: "dataList")
+//            defaults.synchronize()
+//            self.tableView.reloadData()
+//           // self.activityIndicatorView.stopAnimating()
+//         // return
+//        }
+        // 距现在最近的400条
+        let urlString = "https://tools.17500.cn/tb/ssq/lq?limit=30"
+//        let urlString = String(format: "http://www.17500.cn/ssq/details.php?issue=2018%03ld", self.maxIssuse)
         self.webview.loadRequest(URLRequest(url: URL(string:urlString)!))
         self.maxIssuse = self.maxIssuse - 1
     }
@@ -95,31 +97,50 @@ class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,U
     }
     // MARK: - UIWebViewDelegate
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        let url = request.url?.absoluteString
+        print(url)
         return true;
     }
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        if let htmlTxt = webView.stringByEvaluatingJavaScript(from: "document.getElementsByTagName('center')[1].innerHTML") {
-            var dict = [String:Any]()
-            //开奖期数
-            if let issuseRange = htmlTxt.range(of:"“双色球”第") {
-                var issuse = htmlTxt.suffix(from: issuseRange.lowerBound)
-                issuse = issuse.prefix("“双色球”第2019012".count)
-                issuse = issuse.suffix("2019012".count)
-                dict["index"] = String(issuse)
+        if let htmlTxt = webView.stringByEvaluatingJavaScript(from: "document.getElementById('body').innerHTML") {
+            let xml = SWXMLHash.parse(htmlTxt)
+            for trEle in xml["tr"].all {
+                let issuse = trEle["td"][0].element?.text
+                let numTd = trEle["td"][1]
+                let redNum = numTd["font"][0].element?.text
+                let blueNum = numTd["font"][1].element?.text
+                let nums = redNum!+","+blueNum!
+                let dict:[String:String] = ["index":issuse!,"nums":nums]
+                self.dataList.append(dict)
             }
-            // 开奖号
-            if let numsRange = htmlTxt.range(of:"出球顺序：") {
-                var nums = htmlTxt.suffix(from: numsRange.lowerBound)
-                nums = nums.prefix("出球顺序：15 05 18 13 26 09 + 05".count)
-                nums = nums.suffix("15 05 18 13 26 09 + 05".count)
-                let tempNums = nums.replacingOccurrences(of: " + ", with: " ").components(separatedBy: " ").joined(separator: ",")
-                // Could not cast value of type 'Swift.Substring' (0x10733d270) to 'Swift.String'
-                //nums = String(tempNums.prefix(tempNums.count))
-                dict["nums"] = tempNums
-            }
-            self.dataList.append(dict)
-            self .requestWebData()
+            self.tableView.reloadData()
+            self.activityIndicatorView.stopAnimating()
+            
         }
+        
+//
+//        if let htmlTxt = webView.stringByEvaluatingJavaScript(from: "document.getElementsByTagName('center')[1].innerHTML") {
+//            var dict = [String:Any]()
+//            //开奖期数
+//            if let issuseRange = htmlTxt.range(of:"“双色球”第") {
+//                var issuse = htmlTxt.suffix(from: issuseRange.lowerBound)
+//                issuse = issuse.prefix("“双色球”第2019012".count)
+//                issuse = issuse.suffix("2019012".count)
+//                dict["index"] = String(issuse)
+//            }
+//            // 开奖号
+//            if let numsRange = htmlTxt.range(of:"出球顺序：") {
+//                var nums = htmlTxt.suffix(from: numsRange.lowerBound)
+//                nums = nums.prefix("出球顺序：15 05 18 13 26 09 + 05".count)
+//                nums = nums.suffix("15 05 18 13 26 09 + 05".count)
+//                let tempNums = nums.replacingOccurrences(of: " + ", with: " ").components(separatedBy: " ").joined(separator: ",")
+//                // Could not cast value of type 'Swift.Substring' (0x10733d270) to 'Swift.String'
+//                //nums = String(tempNums.prefix(tempNums.count))
+//                dict["nums"] = tempNums
+//            }
+//            self.dataList.append(dict)
+//            self .requestWebData()
+//        }
         
         
     }

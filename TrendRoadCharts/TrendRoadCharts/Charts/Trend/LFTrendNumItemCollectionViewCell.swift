@@ -55,6 +55,17 @@ class LFTrendNumItemCollectionViewCell: UICollectionViewCell {
             self.drawShowTxt(txtColor: txtColor,rect:rect)
             self.drawAwardCountCircle(context: context!, rect: rect)
         }
+        
+        // 画边框左侧+顶侧
+        context?.setLineCap(.round)
+        context?.setLineWidth(1)
+        context?.setAllowsAntialiasing(true)
+        context?.setStrokeColor(UIColor.red.cgColor)
+        context?.beginPath()
+        context?.move(to: CGPoint(x: 0, y: rect.height))
+        context?.addLine(to: CGPoint.zero)
+        context?.addLine(to: CGPoint(x: rect.width, y: 0))
+        context?.strokePath()
     }
     func drawCircleBg(context:CGContext,rect:CGRect,bgColor:UIColor) -> Void {
         // 园点坐标
@@ -67,10 +78,10 @@ class LFTrendNumItemCollectionViewCell: UICollectionViewCell {
         context.drawPath(using: .fill)
     }
     func drawRoundBg(context:CGContext,rect:CGRect,bgColor:UIColor,radius:CGFloat) -> Void {
-        let width: CGFloat = rect.width-5
-        let height: CGFloat = rect.height-5
+        let width: CGFloat = rect.width-6
+        let height: CGFloat = rect.height-6
         let x: CGFloat = (rect.width - width) / 2
-        let y: CGFloat = (rect.height - height) / 2
+        let y: CGFloat = (rect.height - height) / 2-radius/2
         // 左上角的点
         let topLeftPoint: CGPoint = CGPoint(x: x, y: y+radius)
         // 右上角的点
@@ -84,8 +95,8 @@ class LFTrendNumItemCollectionViewCell: UICollectionViewCell {
         let point2 = CGPoint(x: topLeftPoint.x+radius, y: topLeftPoint.y)
         context.move(to: point1)
         context.addArc(tangent1End: topLeftPoint, tangent2End: point2, radius: radius)
-        let point3 = CGPoint(x: topRightPoint.x, y: topRightPoint.y+radius)
-        context.addArc(tangent1End: topRightPoint, tangent2End: point3, radius: radius)
+        let point3 = CGPoint(x: topRightPoint.x, y: topRightPoint.y+radius*2)
+        context.addArc(tangent1End: CGPoint(x: topRightPoint.x, y: topRightPoint.y+radius), tangent2End: point3, radius: radius)
         let point4 = CGPoint(x: bottomRightPoint.x-radius, y: bottomRightPoint.y)
         context.addArc(tangent1End: bottomRightPoint, tangent2End: point4, radius: radius)
         let point5 = CGPoint(x: bottomLeftPoint.x, y: bottomLeftPoint.y-radius)
@@ -115,7 +126,7 @@ class LFTrendNumItemCollectionViewCell: UICollectionViewCell {
             center.x = center.x+rect.size.width / 4
             center.y = center.y-rect.size.height / 4
             // 圆形半径
-            let radius: CGFloat = (min(rect.width, rect.height) - 4)/4
+            let radius: CGFloat = (min(rect.width, rect.height) - 4)/4-2
             // 设置圆形
             context.addArc(center: center, radius: radius, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: false)
             var smallBgColor = self.smallCircleBgColor;

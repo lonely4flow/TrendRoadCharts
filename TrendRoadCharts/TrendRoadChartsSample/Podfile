@@ -16,6 +16,8 @@ target 'TrendRoadChartsSample' do
   pod 'SwiftyJSON', '~> 4.2.0'
   # json与model的映射
   pod 'ObjectMapper', '~> 3.4.2'
+  # 解析xml
+  pod 'SWXMLHash', '~> 4.7.0'
   # 滚动分页展示
   # Pods for TrendRoadChartsSample
 

@@ -2,7 +2,7 @@
 //  TrendRoadChartsSampleUITests.swift
 //  TrendRoadChartsSampleUITests
 //
-//  Created by 娜娜子 on 29/01/2019.
+//  Created by LonelyFlow on 29/01/2019.
 //  Copyright © 2019 Lonely traveller. All rights reserved.
 //
 

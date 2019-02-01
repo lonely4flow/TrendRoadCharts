@@ -2,7 +2,7 @@
 //  TwoColorOpenTableViewCell.swift
 //  TrendRoadChartsSample
 //
-//  Created by 娜娜子 on 31/01/2019.
+//  Created by LonelyFlow on 31/01/2019.
 //  Copyright © 2019 Lonely traveller. All rights reserved.
 //
 

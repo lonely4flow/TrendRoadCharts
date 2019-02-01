@@ -26,6 +26,7 @@
 		EA5A3D722202D21F0093B886 /* LFNumTrendIssuseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D702202D21F0093B886 /* LFNumTrendIssuseTableViewCell.swift */; };
 		EA5A3D732202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA5A3D712202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib */; };
 		EA5A3D752202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D742202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift */; };
+		EA5A3D772204271F0093B886 /* LFOmiItemFrameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D762204271F0093B886 /* LFOmiItemFrameModel.swift */; };
 		EA78696422002ECB003AC4CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA78696322002ECB003AC4CF /* AppDelegate.swift */; };
 		EA78696622002ECB003AC4CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA78696522002ECB003AC4CF /* ViewController.swift */; };
 		EA78696922002ECB003AC4CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA78696722002ECB003AC4CF /* Main.storyboard */; };
@@ -87,6 +88,7 @@
 		EA5A3D702202D21F0093B886 /* LFNumTrendIssuseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFNumTrendIssuseTableViewCell.swift; sourceTree = "<group>"; };
 		EA5A3D712202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFNumTrendIssuseTableViewCell.xib; sourceTree = "<group>"; };
 		EA5A3D742202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFTrendNumItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		EA5A3D762204271F0093B886 /* LFOmiItemFrameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFOmiItemFrameModel.swift; sourceTree = "<group>"; };
 		EA78696022002ECB003AC4CF /* TrendRoadChartsSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrendRoadChartsSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA78696322002ECB003AC4CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA78696522002ECB003AC4CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				EA5A3D702202D21F0093B886 /* LFNumTrendIssuseTableViewCell.swift */,
 				EA5A3D712202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib */,
 				EA5A3D742202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift */,
+				EA5A3D762204271F0093B886 /* LFOmiItemFrameModel.swift */,
 			);
 			path = Trend;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SWXMLHash/SWXMLHash.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -518,6 +522,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWXMLHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -555,6 +560,7 @@
 				EA5A3D672202B2D60093B886 /* OpenResultViewController.swift in Sources */,
 				EACD317422019EC0003DEA9C /* Array+LFTool.swift in Sources */,
 				EA5A3D6F2202D0E10093B886 /* LFTrendNumLayout.swift in Sources */,
+				EA5A3D772204271F0093B886 /* LFOmiItemFrameModel.swift in Sources */,
 				EACD31772201B2C3003DEA9C /* LFNumTrendViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

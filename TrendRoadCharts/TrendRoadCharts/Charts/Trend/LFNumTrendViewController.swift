@@ -67,7 +67,7 @@ class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableVi
     lazy var collectionHeaderView = {()-> UIScrollView in
         let scrollView = UIScrollView(frame: CGRect.zero)
         scrollView.delegate = self
-        scrollView.backgroundColor = UIColor.green
+        scrollView.backgroundColor = UIColor.white
         return scrollView
     }()
     // 懒加载右侧collectionView
@@ -85,8 +85,16 @@ class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(self.tableView)
+        let tableHeaderLbl = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        tableHeaderLbl.textAlignment = NSTextAlignment.center
+        tableHeaderLbl.font = UIFont.systemFont(ofSize: 14)
+        tableHeaderLbl.text = "期号"
+        tableHeaderLbl.textColor = UIColor.lightGray
+        tableHeaderLbl.backgroundColor = UIColor.white
+        self.view.addSubview(tableHeaderLbl)
         self.tableView.snp.makeConstraints { (make) in
-            make.top.left.equalTo(0)
+            make.left.equalTo(0)
+            make.top.equalTo(40)
             make.bottom.equalTo(-100)
             make.width.equalTo(100)
         }
@@ -102,6 +110,16 @@ class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableVi
             make.bottom.equalTo(-100)
             make.left.equalTo(self.tableView.snp.right)
             make.top.equalTo(self.collectionHeaderView.snp.bottom)
+        }
+        let verticalLine = UIView(frame: CGRect.zero)
+        verticalLine.backgroundColor = UIColor.lightGray
+        self.view.addSubview(verticalLine)
+        verticalLine.snp.makeConstraints { (make) in
+            make.top.equalTo(0)
+            make.left.equalTo(self.tableView.snp.right)
+            //make.right.equalTo(self.collectionView.snp.left)
+            make.width.equalTo(0.5)
+            make.bottom.equalTo(self.tableView.snp.bottom)
         }
         print((#file).components(separatedBy: "/").last!,#function)
     }
@@ -130,15 +148,109 @@ class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableVi
                 //print(omiList,statisticsList)
                 self.omiList = omiList
                 self.statisticsList = statisticsList
+                self.calculateItemFrame()
                 DispatchQueue.global().asyncAfter(deadline: .now()+2, execute: {
                     DispatchQueue.main.async {
                        // self.activityIndicatorView.stopAnimating()
                         self.tableView.reloadData()
                         self.collectionView.reloadData()
+                        self.drawLines()
                     }
                 })
                 
             }
+        }
+    }
+    func calculateItemFrame() -> Void {
+        for rowIndex in 0..<self.omiList.count {
+            let rowModel = self.omiList[rowIndex]
+            // 等待开奖的直接跳过
+            if rowModel.isWaitOpen {
+                continue
+            }
+            var frameList: [LFOmiItemFrameModel] = []
+            for colIndex in 0..<rowModel.subList.count {
+                let omiItemModel = rowModel.subList[colIndex]
+                let frameModel = LFOmiItemFrameModel(omiItemModel: omiItemModel)
+                
+                var x: CGFloat = 0
+                var y: CGFloat = 0
+                x = CGFloat(colIndex) * self.itemSize.width
+                y = CGFloat(rowIndex) * self.itemSize.height
+                frameModel.realRect = CGRect(x: x, y: y, width: self.itemSize.width, height: self.itemSize.height)
+                frameModel.center = CGPoint(x: x+self.itemSize.width/2, y: y+self.itemSize.height/2)
+                frameList.append(frameModel)
+            }
+            rowModel.subList = frameList
+        }
+    }
+    func drawLines() -> Void {
+        if self.colList.count != 16 {
+            return
+        }
+        var awardList: [LFOmiItemFrameModel] = []
+        for rowModel in self.omiList {
+            for itemModel in rowModel.subList {
+                if itemModel.isAward {
+                    awardList.append((itemModel as! LFOmiItemFrameModel))
+                }
+            }
+        }
+        // 半径
+        let radius: CGFloat = (min(self.itemSize.width,self.itemSize.height) - 4)/2
+        for index in 0..<(awardList.count-1) {
+            // 当前行中奖的model
+            let currentRowFrameModel = awardList[index]
+            // 下一行中奖的model
+            let nextRowFrameModel = awardList[index+1]
+            // 两个点x之间的距离
+            let xWidth = currentRowFrameModel.center.x - nextRowFrameModel.center.x
+            // 两个点y之间的距离
+            let yHeight = nextRowFrameModel.center.y - currentRowFrameModel.center.y
+            // 两个点之间的距离，直角三角形的斜边长度计算 x²+y²=z²
+            let dis: CGFloat = sqrt(pow(xWidth,2.0)+pow(yHeight,2.0))
+            let rate = radius/dis
+            if nextRowFrameModel.center.x <= currentRowFrameModel.center.x {
+                // 下一个节点在当前节点的左侧或正下测
+                // 使用等边三角形进行计算
+                let x1 = currentRowFrameModel.center.x - rate*(currentRowFrameModel.center.x - nextRowFrameModel.center.x)
+                let y1 = currentRowFrameModel.center.y + rate*(nextRowFrameModel.center.y-currentRowFrameModel.center.y)
+                
+                let x2 = nextRowFrameModel.center.x + rate*(currentRowFrameModel.center.x - nextRowFrameModel.center.x)
+                let y2 = currentRowFrameModel.center.y - rate*(nextRowFrameModel.center.y-currentRowFrameModel.center.y)
+                currentRowFrameModel.startPoint = CGPoint(x: x1, y: y1)
+                nextRowFrameModel.endPoint = CGPoint(x: x2, y: y2)
+            }else{
+                // 下一个节点在当前节点的右侧
+                let x1 = currentRowFrameModel.center.x + rate*(nextRowFrameModel.center.x - currentRowFrameModel.center.x)
+                let y1 = currentRowFrameModel.center.y + rate*(nextRowFrameModel.center.y-currentRowFrameModel.center.y)
+                
+                let x2 = nextRowFrameModel.center.x - rate*(nextRowFrameModel.center.x - currentRowFrameModel.center.x)
+                let y2 = currentRowFrameModel.center.y - rate*(nextRowFrameModel.center.y-currentRowFrameModel.center.y)
+                currentRowFrameModel.startPoint = CGPoint(x: x1, y: y1)
+                nextRowFrameModel.endPoint = CGPoint(x: x2, y: y2)
+            }
+            
+            var startPoint = currentRowFrameModel.startPoint!
+            let endPoint = nextRowFrameModel.endPoint!
+            // 在数值方向的同一列时，线画的长一些
+            if startPoint.x == endPoint.x {
+                startPoint.y = startPoint.y-5
+            }
+            let bezierPath = UIBezierPath()
+            bezierPath.move(to: startPoint)
+            bezierPath.addLine(to: endPoint)
+            
+            let layer = CAShapeLayer()
+            layer.path = bezierPath.cgPath
+            layer.strokeColor = UIColor.red.cgColor
+            layer.fillColor = UIColor.clear.cgColor
+            layer.lineWidth = 2
+            layer.lineCap = kCALineJoinRound
+            layer.lineJoin = kCALineJoinRound
+            layer.name = String(format: "trendLineLayer_%ld", index)
+            
+            self.collectionView.layer.addSublayer(layer)
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -154,28 +266,21 @@ class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-
+    // MARK: - UIScrollViewDelegate
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset
+        if scrollView == self.tableView {
+            self.collectionView.contentOffset.y = offset.y
+        } else if scrollView == self.collectionView {
+            self.tableView.contentOffset.y = offset.y
+            self.collectionHeaderView.contentOffset.x = offset.x
+        } else if scrollView == self.collectionHeaderView {
+            self.collectionView.contentOffset.x = offset.x
+        }
+    }
     // MARK: - UITableViewDataSource,UITableViewDelegate
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
-    }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = Bundle.main.loadNibNamed("LFNumTrendIssuseTableViewCell", owner: nil, options: nil)?.last as! LFNumTrendIssuseTableViewCell
-        header.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40)
-        header.backgroundColor = UIColor.white
-        header.issuseLbl.textColor = UIColor.lightGray
-        header.issuseLbl.text = "期号"
-        return header
-    }
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
-    }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: CGFloat.leastNormalMagnitude))
-        return footer
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.omiList.count > 0 {
@@ -268,6 +373,9 @@ class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableVi
                 cell.awardCount = itemModel.awardCount
                 if itemModel.isAward {
                     cell.awardStyle = .circle(bgColor: UIColor.brown, txtColor: UIColor.green)
+                    if self.colList.count == 4 {
+                        cell.awardStyle = .radiusRound(bgColor: UIColor.orange, txtColor: UIColor.purple, radius: 5)
+                    }
                 }else{
                     cell.awardStyle = .none(txtColor: UIColor.lightGray)
                 }
@@ -303,6 +411,7 @@ class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableVi
             cell.awardCount = 0
         }
         cell.backgroundColor = UIColor.white
+        cell.setNeedsDisplay()
         return cell
     }
 }

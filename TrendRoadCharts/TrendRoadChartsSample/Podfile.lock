@@ -7,6 +7,7 @@ PODS:
   - ObjectMapper (3.4.2)
   - SnapKit (4.0.1)
   - SwiftyJSON (4.2.0)
+  - SWXMLHash (4.7.6)
 
 DEPENDENCIES:
   - Alamofire (~> 4.8.0)
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - ObjectMapper (~> 3.4.2)
   - SnapKit (~> 4.0.0)
   - SwiftyJSON (~> 4.2.0)
+  - SWXMLHash (~> 4.7.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -24,6 +26,7 @@ SPEC REPOS:
     - ObjectMapper
     - SnapKit
     - SwiftyJSON
+    - SWXMLHash
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
@@ -32,7 +35,8 @@ SPEC CHECKSUMS:
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  SWXMLHash: f6e0933ce74f2626669dc544851bc9fc1941670d
 
-PODFILE CHECKSUM: aa6c776969b9a60c6ad8084fa857134e32dc96ea
+PODFILE CHECKSUM: 123ec5e84dca6da92f22974c9d73ca8ff7dee84a
 
 COCOAPODS: 1.5.3
