@@ -32,48 +32,13 @@ class TrendViewController: UIViewController {
                             "title":"红球走势",
                            "clazz":"LFNumTrendViewController",
                            "colList":Array<Any>.lf_fillNum(from: 1, to: 33, zeroCount: 2),
-                           "mapClosure":{(orginList:[Any]) -> [LFTrendInputParamModel] in
-                                return orginList.map { (obj :Any) -> LFTrendInputParamModel in
-                                    let dict = obj as! [String:Any]
-                                    let model = LFTrendInputParamModel()
-                                    model.orginObj = dict
-                                    let numsTxt: String = dict["nums"] as! String
-                                    let nums: [String] =  numsTxt.components(separatedBy: ",")
-                                    if nums.count > 0 {
-                                        let redTxts: [String] = Array(nums.prefix(6))
-                                        model.beforeTransformTxt = redTxts.joined(separator: ",")
-                                        model.afterTransformTxts = redTxts
-                                        model.isWaitOpen = false
-                                    }else{
-                                        model.isWaitOpen = true
-                                    }
-                                    return model
-                                }
-                            
-                            }
+                           "mapClosure":MapInputModelClosureTool.getNormalMapClosure(range: NSRange(location: 0, length: 6))
                         ],
                       ["title":"篮球走势",
                        "clazz":"LFNumTrendViewController",
                        "colList":Array<Any>.lf_fillNum(from: 1, to: 16, zeroCount: 2),
-                       "mapClosure":{(orginList:[Any]) -> [LFTrendInputParamModel] in
-                        return orginList.map { (obj :Any) -> LFTrendInputParamModel in
-                            let dict = obj as! [String:Any]
-                            let model = LFTrendInputParamModel()
-                            model.orginObj = dict
-                            let numsTxt: String = dict["nums"] as! String
-                            let nums: [String] =  numsTxt.components(separatedBy: ",")
-                            if nums.count > 0 {
-                                let blueTxt: String = nums.last!
-                                model.beforeTransformTxt = blueTxt
-                                model.afterTransformTxts = [blueTxt]
-                                model.isWaitOpen = false
-                            }else{
-                                model.isWaitOpen = true
-                            }
-                            return model
-                        }
-                        
-                        }
+                       "mapClosure":MapInputModelClosureTool.getNormalMapClosure(range: NSRange(location: 6, length: 1)),
+                       "drawLineClosures":[DrawLineClosureTool.getNormalAwardClosure(lineColor:UIColor.brown)]
                        ],
                       ["title":"篮球大小单双",
                        "clazz":"LFNumTrendViewController",
@@ -98,7 +63,9 @@ class TrendViewController: UIViewController {
                             return model
                         }
                         
-                        }
+                        },
+                       "drawLineClosures":[DrawLineClosureTool.getAwardClosure(containsTxts:["大","小"],lineColor:UIColor.orange),
+                                           DrawLineClosureTool.getAwardClosure(containsTxts:["单","双"],lineColor:UIColor.orange)]
                        ],
                       ["title":"篮球冷热",
                        "clazz":"LFColdHotViewController"],
@@ -121,6 +88,9 @@ class TrendViewController: UIViewController {
                 numVC.colList = dict["colList"] as! [String]
                 if let mapClosure = dict["mapClosure"] as? MapTrendInputBlock {
                     numVC.mapClosure = mapClosure
+                }
+                if let drawLineClosures = dict["drawLineClosures"] as? [DrawTrendLineBlock] {
+                    numVC.drawLineClosures = drawLineClosures
                 }
             }
             return vc

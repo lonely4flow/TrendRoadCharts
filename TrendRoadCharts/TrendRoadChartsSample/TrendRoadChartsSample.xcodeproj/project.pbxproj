@@ -27,6 +27,7 @@
 		EA5A3D732202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA5A3D712202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib */; };
 		EA5A3D752202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D742202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift */; };
 		EA5A3D772204271F0093B886 /* LFOmiItemFrameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D762204271F0093B886 /* LFOmiItemFrameModel.swift */; };
+		EA5A3D7922056D200093B886 /* LFTrendDrawLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A3D7822056D200093B886 /* LFTrendDrawLineModel.swift */; };
 		EA78696422002ECB003AC4CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA78696322002ECB003AC4CF /* AppDelegate.swift */; };
 		EA78696622002ECB003AC4CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA78696522002ECB003AC4CF /* ViewController.swift */; };
 		EA78696922002ECB003AC4CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA78696722002ECB003AC4CF /* Main.storyboard */; };
@@ -89,6 +90,7 @@
 		EA5A3D712202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFNumTrendIssuseTableViewCell.xib; sourceTree = "<group>"; };
 		EA5A3D742202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFTrendNumItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		EA5A3D762204271F0093B886 /* LFOmiItemFrameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFOmiItemFrameModel.swift; sourceTree = "<group>"; };
+		EA5A3D7822056D200093B886 /* LFTrendDrawLineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFTrendDrawLineModel.swift; sourceTree = "<group>"; };
 		EA78696022002ECB003AC4CF /* TrendRoadChartsSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrendRoadChartsSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA78696322002ECB003AC4CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA78696522002ECB003AC4CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				EA5A3D712202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib */,
 				EA5A3D742202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift */,
 				EA5A3D762204271F0093B886 /* LFOmiItemFrameModel.swift */,
+				EA5A3D7822056D200093B886 /* LFTrendDrawLineModel.swift */,
 			);
 			path = Trend;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA5A3D7922056D200093B886 /* LFTrendDrawLineModel.swift in Sources */,
 				EA5A3D6122028F8D0093B886 /* DNSPageStyle.swift in Sources */,
 				EACD31792201B308003DEA9C /* TrendViewController.swift in Sources */,
 				EA5A3D5F22028F8D0093B886 /* DNSPageViewManager.swift in Sources */,

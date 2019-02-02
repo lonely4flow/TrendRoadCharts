@@ -11,12 +11,19 @@ import SnapKit
 
 // 声明一个闭包类型 MapTrendInputBlock
 typealias MapTrendInputBlock = (_ originList:[Any])->([LFTrendInputParamModel])
+typealias DrawTrendLineBlock = (_ omiList:[LFTrendOutputOmiRowModel])->(LFTrendDrawLineModel)
+
 
 class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
 
     var mapClosure: MapTrendInputBlock? {
         didSet(newValue){
             self.calculateDatas()
+        }
+    }
+    var drawLineClosures: [DrawTrendLineBlock]?{
+        didSet(newValue){
+            self.drawLines()
         }
     }
     var dataList: [[String:Any]] = [] {
@@ -139,19 +146,17 @@ class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableVi
         }
         self.collectionHeaderView.contentSize.width = CGFloat(self.colList.count) * self.itemSize.width
     }
+    // MARK: - 计算遗漏及统计数据
     func calculateDatas() -> Void {
         if self.dataList.count == 0 || self.mapClosure == nil {
             return
         }
         if let inputList = self.mapClosure?(self.dataList) {
             LFTrendCalculate.calculateOmiAndStatictis(inputList: inputList, colList: self.colList) { (omiList: [LFTrendOutputOmiRowModel], statisticsList: [LFTrendOutputStatisticsItemModel]) in
-                //print(omiList,statisticsList)
                 self.omiList = omiList
                 self.statisticsList = statisticsList
-                self.calculateItemFrame()
                 DispatchQueue.global().asyncAfter(deadline: .now()+2, execute: {
                     DispatchQueue.main.async {
-                       // self.activityIndicatorView.stopAnimating()
                         self.tableView.reloadData()
                         self.collectionView.reloadData()
                         self.drawLines()
@@ -161,6 +166,87 @@ class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableVi
             }
         }
     }
+    // MARK: - 计算位置并画线
+    func drawLines() -> Void {
+        
+        if self.omiList.count == 0 {
+            // 没有数据不做计算
+            return
+        }
+        if self.drawLineClosures == nil {
+            return
+        }
+        // 对数据的frame进行计算
+        self.calculateItemFrame()
+        // 对旧的线进行删除
+        self.clearOldLines()
+        // 开始划线
+        for i in 0..<self.drawLineClosures!.count {
+            let lineClosure = self.drawLineClosures![i]
+            let lineModel = lineClosure(self.omiList)
+            
+            // 半径
+            let radius: CGFloat = (min(self.itemSize.width,self.itemSize.height) - 4)/2
+            for index in 0..<(lineModel.frameList.count-1) {
+                // 当前行中奖的model
+                let currentRowFrameModel = lineModel.frameList[index] as! LFOmiItemFrameModel
+                // 下一行中奖的model
+                let nextRowFrameModel = lineModel.frameList[index+1] as! LFOmiItemFrameModel
+                // 两个中心点水平方向之间的距离
+                let disWidth = abs(currentRowFrameModel.center.x - nextRowFrameModel.center.x)
+                // 两个中心点竖直方向之间的距离
+                let disHeight = abs(nextRowFrameModel.center.y - currentRowFrameModel.center.y)
+                // 两个点之间的距离，直角三角形的斜边长度计算 x²+y²=z²
+                let dis: CGFloat = sqrt(pow(disWidth,2.0)+pow(disHeight,2.0))
+                let rate = radius/dis
+                if nextRowFrameModel.center.x <= currentRowFrameModel.center.x {
+                    // 下一个节点在当前节点的左侧或正下测
+                    // 使用等边三角形进行计算
+                    // 下一个节点在当前节点的右侧
+                    let x1 = currentRowFrameModel.center.x - rate*disWidth
+                    let y1 = currentRowFrameModel.center.y + rate*disHeight
+                    
+                    let x2 = nextRowFrameModel.center.x + rate*disWidth
+                    let y2 = nextRowFrameModel.center.y - rate*disHeight
+                    currentRowFrameModel.startPoint = CGPoint(x: x1, y: y1)
+                    nextRowFrameModel.endPoint = CGPoint(x: x2, y: y2)
+                }else{
+                    // 下一个节点在当前节点的右侧
+                    let x1 = currentRowFrameModel.center.x + rate*disWidth
+                    let y1 = currentRowFrameModel.center.y + rate*disHeight
+                    
+                    let x2 = nextRowFrameModel.center.x - rate*disWidth
+                    let y2 = nextRowFrameModel.center.y - rate*disHeight
+                    currentRowFrameModel.startPoint = CGPoint(x: x1, y: y1)
+                    nextRowFrameModel.endPoint = CGPoint(x: x2, y: y2)
+                }
+                
+                var startPoint = currentRowFrameModel.startPoint!
+                var endPoint = nextRowFrameModel.endPoint!
+                // 在数值方向的同一列时，线画的长一些
+                if startPoint.x == endPoint.x {
+                    startPoint.y = startPoint.y-5
+                    endPoint.y = endPoint.y+5
+                }
+                let bezierPath = UIBezierPath()
+                bezierPath.move(to: startPoint)
+                bezierPath.addLine(to: endPoint)
+                
+                let layer = CAShapeLayer()
+                layer.path = bezierPath.cgPath
+                layer.strokeColor = lineModel.lineColor.cgColor
+                layer.fillColor = UIColor.clear.cgColor
+                layer.lineWidth = lineModel.lineWith
+                layer.lineCap = kCALineJoinRound
+                layer.lineJoin = kCALineJoinRound
+                layer.name = String(format: "trendLineLayer_%ld", index)
+                
+                self.collectionView.layer.addSublayer(layer)
+            }
+        }
+        
+    }
+    // MARK: 计算每个数字的位置
     func calculateItemFrame() -> Void {
         for rowIndex in 0..<self.omiList.count {
             let rowModel = self.omiList[rowIndex]
@@ -184,75 +270,24 @@ class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableVi
             rowModel.subList = frameList
         }
     }
-    func drawLines() -> Void {
-        if self.colList.count != 16 {
-            return
-        }
-        var awardList: [LFOmiItemFrameModel] = []
-        for rowModel in self.omiList {
-            for itemModel in rowModel.subList {
-                if itemModel.isAward {
-                    awardList.append((itemModel as! LFOmiItemFrameModel))
+    // MARK: 清空之前的连线
+    func clearOldLines() -> Void {
+        if self.collectionView.layer.sublayers != nil && self.collectionView.layer.sublayers!.count>0 {
+            let count = self.collectionView.layer.sublayers!.count
+            for i in 0..<count {
+                let subLayer = self.collectionView.layer.sublayers![count-i-1]
+                if let layerName = subLayer.name
+                {
+                    if layerName.hasPrefix("trendLineLayer_") {
+                        subLayer.removeFromSuperlayer()
+                    }
                 }
             }
         }
-        // 半径
-        let radius: CGFloat = (min(self.itemSize.width,self.itemSize.height) - 4)/2
-        for index in 0..<(awardList.count-1) {
-            // 当前行中奖的model
-            let currentRowFrameModel = awardList[index]
-            // 下一行中奖的model
-            let nextRowFrameModel = awardList[index+1]
-            // 两个点x之间的距离
-            let xWidth = currentRowFrameModel.center.x - nextRowFrameModel.center.x
-            // 两个点y之间的距离
-            let yHeight = nextRowFrameModel.center.y - currentRowFrameModel.center.y
-            // 两个点之间的距离，直角三角形的斜边长度计算 x²+y²=z²
-            let dis: CGFloat = sqrt(pow(xWidth,2.0)+pow(yHeight,2.0))
-            let rate = radius/dis
-            if nextRowFrameModel.center.x <= currentRowFrameModel.center.x {
-                // 下一个节点在当前节点的左侧或正下测
-                // 使用等边三角形进行计算
-                let x1 = currentRowFrameModel.center.x - rate*(currentRowFrameModel.center.x - nextRowFrameModel.center.x)
-                let y1 = currentRowFrameModel.center.y + rate*(nextRowFrameModel.center.y-currentRowFrameModel.center.y)
-                
-                let x2 = nextRowFrameModel.center.x + rate*(currentRowFrameModel.center.x - nextRowFrameModel.center.x)
-                let y2 = currentRowFrameModel.center.y - rate*(nextRowFrameModel.center.y-currentRowFrameModel.center.y)
-                currentRowFrameModel.startPoint = CGPoint(x: x1, y: y1)
-                nextRowFrameModel.endPoint = CGPoint(x: x2, y: y2)
-            }else{
-                // 下一个节点在当前节点的右侧
-                let x1 = currentRowFrameModel.center.x + rate*(nextRowFrameModel.center.x - currentRowFrameModel.center.x)
-                let y1 = currentRowFrameModel.center.y + rate*(nextRowFrameModel.center.y-currentRowFrameModel.center.y)
-                
-                let x2 = nextRowFrameModel.center.x - rate*(nextRowFrameModel.center.x - currentRowFrameModel.center.x)
-                let y2 = currentRowFrameModel.center.y - rate*(nextRowFrameModel.center.y-currentRowFrameModel.center.y)
-                currentRowFrameModel.startPoint = CGPoint(x: x1, y: y1)
-                nextRowFrameModel.endPoint = CGPoint(x: x2, y: y2)
-            }
-            
-            var startPoint = currentRowFrameModel.startPoint!
-            let endPoint = nextRowFrameModel.endPoint!
-            // 在数值方向的同一列时，线画的长一些
-            if startPoint.x == endPoint.x {
-                startPoint.y = startPoint.y-5
-            }
-            let bezierPath = UIBezierPath()
-            bezierPath.move(to: startPoint)
-            bezierPath.addLine(to: endPoint)
-            
-            let layer = CAShapeLayer()
-            layer.path = bezierPath.cgPath
-            layer.strokeColor = UIColor.red.cgColor
-            layer.fillColor = UIColor.clear.cgColor
-            layer.lineWidth = 2
-            layer.lineCap = kCALineJoinRound
-            layer.lineJoin = kCALineJoinRound
-            layer.name = String(format: "trendLineLayer_%ld", index)
-            
-            self.collectionView.layer.addSublayer(layer)
-        }
+        
+        
     }
+    // MARK: -
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print((#file).components(separatedBy: "/").last!,#function)
