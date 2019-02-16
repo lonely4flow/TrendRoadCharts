@@ -8,6 +8,21 @@
 
 import Foundation
 extension Array {
+    public func lf_addObj(count: Int,obj:AnyObject) -> Void
+    {
+        var list: [AnyObject] = self as [AnyObject]
+        for _ in 0...count {
+            list.append(obj)
+        }
+    }
+    public static func lf_fillObj(count: Int, obj:AnyObject) -> [AnyObject]
+    {
+        var list: [AnyObject] = []
+        for _ in 0...count {
+            list.append(obj)
+        }
+        return list
+    }
     // 构建数字的数组
     public static func lf_fillNum(from: Int,to: Int,zeroCount: Int = 1) -> [String] {
         var array: [String] = []
