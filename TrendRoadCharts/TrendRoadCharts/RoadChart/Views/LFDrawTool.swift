@@ -44,4 +44,15 @@ class LFDrawTool: NSObject {
         let textRect = CGRect(x: (rect.width-txtSize.width)/2, y: (rect.height-txtSize.height)/2, width: txtSize.width, height: txtSize.height)
         txt.draw(in: textRect, withAttributes: [NSAttributedStringKey.font:font,NSAttributedStringKey.foregroundColor:color])
     }
+    
+    static func lf_txtWidth(txt: String,font: UIFont,height:CGFloat) -> CGFloat
+    {
+        let txtSize = txt.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: height),options: .usesLineFragmentOrigin,attributes: [NSAttributedStringKey.font:font],context: nil)
+        return txtSize.width
+    }
+    static func lf_txtHeight(txt: String,font: UIFont,width:CGFloat) -> CGFloat
+    {
+        let txtSize = txt.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)),options: .usesLineFragmentOrigin,attributes: [NSAttributedStringKey.font:font],context: nil)
+        return txtSize.width
+    }
 }

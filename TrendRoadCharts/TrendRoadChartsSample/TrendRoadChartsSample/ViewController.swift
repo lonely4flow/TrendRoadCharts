@@ -45,7 +45,9 @@ class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,U
     // MARK: 展示问路图
     @objc func showRoadCharts()
     {
-        
+        let vc = LFAskRoadTypeListViewController()
+        vc.historyList = self.dataList as [AnyObject]
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: 展示走势图
     @objc func showTrendCharts()

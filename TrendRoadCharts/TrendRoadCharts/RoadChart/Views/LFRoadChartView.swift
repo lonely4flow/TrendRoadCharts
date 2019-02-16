@@ -87,6 +87,9 @@ class LFRoadChartView: UICollectionView,UICollectionViewDataSource,UICollectionV
         return self.dataList.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.dataList.count <= section {
+            return 0
+        }
         let colList = self.dataList[section]
         return colList.count
     }
