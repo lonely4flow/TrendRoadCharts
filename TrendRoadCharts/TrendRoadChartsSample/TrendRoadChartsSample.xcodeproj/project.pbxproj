@@ -41,6 +41,11 @@
 		EA9C41822216CD1900B47822 /* LFRoadInputParamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C41812216CD1900B47822 /* LFRoadInputParamModel.swift */; };
 		EA9C41842216CD4000B47822 /* LFRoadOutputParamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C41832216CD4000B47822 /* LFRoadOutputParamModel.swift */; };
 		EA9C41862216CFF900B47822 /* LFRoadCalculateTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C41852216CFF900B47822 /* LFRoadCalculateTool.swift */; };
+		EA9C41882217B92700B47822 /* LFRoadChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C41872217B92700B47822 /* LFRoadChartView.swift */; };
+		EA9C418A2217B95300B47822 /* LFRoadChartNumLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C41892217B95300B47822 /* LFRoadChartNumLayout.swift */; };
+		EA9C418C2217B97F00B47822 /* LFRoadChartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C418B2217B97F00B47822 /* LFRoadChartCollectionViewCell.swift */; };
+		EA9C418E2217B9B300B47822 /* LFRoadAskTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C418D2217B9B300B47822 /* LFRoadAskTipView.swift */; };
+		EA9C41902217F3CC00B47822 /* LFDrawTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C418F2217F3CC00B47822 /* LFDrawTool.swift */; };
 		EACD3172220185B6003DEA9C /* LFTrendInputParamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD3171220185B6003DEA9C /* LFTrendInputParamModel.swift */; };
 		EACD317422019EC0003DEA9C /* Array+LFTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD317322019EC0003DEA9C /* Array+LFTool.swift */; };
 		EACD31772201B2C3003DEA9C /* LFNumTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD31762201B2C3003DEA9C /* LFNumTrendViewController.swift */; };
@@ -113,6 +118,11 @@
 		EA9C41812216CD1900B47822 /* LFRoadInputParamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRoadInputParamModel.swift; sourceTree = "<group>"; };
 		EA9C41832216CD4000B47822 /* LFRoadOutputParamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRoadOutputParamModel.swift; sourceTree = "<group>"; };
 		EA9C41852216CFF900B47822 /* LFRoadCalculateTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRoadCalculateTool.swift; sourceTree = "<group>"; };
+		EA9C41872217B92700B47822 /* LFRoadChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRoadChartView.swift; sourceTree = "<group>"; };
+		EA9C41892217B95300B47822 /* LFRoadChartNumLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRoadChartNumLayout.swift; sourceTree = "<group>"; };
+		EA9C418B2217B97F00B47822 /* LFRoadChartCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRoadChartCollectionViewCell.swift; sourceTree = "<group>"; };
+		EA9C418D2217B9B300B47822 /* LFRoadAskTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRoadAskTipView.swift; sourceTree = "<group>"; };
+		EA9C418F2217F3CC00B47822 /* LFDrawTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFDrawTool.swift; sourceTree = "<group>"; };
 		EACD3171220185B6003DEA9C /* LFTrendInputParamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFTrendInputParamModel.swift; sourceTree = "<group>"; };
 		EACD317322019EC0003DEA9C /* Array+LFTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+LFTool.swift"; sourceTree = "<group>"; };
 		EACD31762201B2C3003DEA9C /* LFNumTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFNumTrendViewController.swift; sourceTree = "<group>"; };
@@ -295,7 +305,14 @@
 		EA7869982200314E003AC4CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EACD31752201B29B003DEA9C /* Trend */,
+				EACD31762201B2C3003DEA9C /* LFNumTrendViewController.swift */,
+				EA5A3D682202B30C0093B886 /* LFColdHotViewController.swift */,
+				EA5A3D6E2202D0E10093B886 /* LFTrendNumLayout.swift */,
+				EA5A3D702202D21F0093B886 /* LFNumTrendIssuseTableViewCell.swift */,
+				EA5A3D712202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib */,
+				EA5A3D742202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift */,
+				EA5A3D762204271F0093B886 /* LFOmiItemFrameModel.swift */,
+				EA5A3D7822056D200093B886 /* LFTrendDrawLineModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -339,23 +356,13 @@
 		EA9C41802216BD1E00B47822 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EA9C41872217B92700B47822 /* LFRoadChartView.swift */,
+				EA9C41892217B95300B47822 /* LFRoadChartNumLayout.swift */,
+				EA9C418B2217B97F00B47822 /* LFRoadChartCollectionViewCell.swift */,
+				EA9C418D2217B9B300B47822 /* LFRoadAskTipView.swift */,
+				EA9C418F2217F3CC00B47822 /* LFDrawTool.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		EACD31752201B29B003DEA9C /* Trend */ = {
-			isa = PBXGroup;
-			children = (
-				EACD31762201B2C3003DEA9C /* LFNumTrendViewController.swift */,
-				EA5A3D682202B30C0093B886 /* LFColdHotViewController.swift */,
-				EA5A3D6E2202D0E10093B886 /* LFTrendNumLayout.swift */,
-				EA5A3D702202D21F0093B886 /* LFNumTrendIssuseTableViewCell.swift */,
-				EA5A3D712202D21F0093B886 /* LFNumTrendIssuseTableViewCell.xib */,
-				EA5A3D742202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift */,
-				EA5A3D762204271F0093B886 /* LFOmiItemFrameModel.swift */,
-				EA5A3D7822056D200093B886 /* LFTrendDrawLineModel.swift */,
-			);
-			path = Trend;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -584,18 +591,23 @@
 			files = (
 				EA5A3D7922056D200093B886 /* LFTrendDrawLineModel.swift in Sources */,
 				EA5A3D6122028F8D0093B886 /* DNSPageStyle.swift in Sources */,
+				EA9C41882217B92700B47822 /* LFRoadChartView.swift in Sources */,
 				EA9C41842216CD4000B47822 /* LFRoadOutputParamModel.swift in Sources */,
 				EACD31792201B308003DEA9C /* TrendViewController.swift in Sources */,
 				EA5A3D5F22028F8D0093B886 /* DNSPageViewManager.swift in Sources */,
+				EA9C41902217F3CC00B47822 /* LFDrawTool.swift in Sources */,
 				EACD3172220185B6003DEA9C /* LFTrendInputParamModel.swift in Sources */,
 				EA5A3D752202D8650093B886 /* LFTrendNumItemCollectionViewCell.swift in Sources */,
 				EA5A3D6C2202C2FF0093B886 /* TwoColorOpenTableViewCell.swift in Sources */,
+				EA9C418C2217B97F00B47822 /* LFRoadChartCollectionViewCell.swift in Sources */,
 				EA5A3D5E22028F8D0093B886 /* DNSPageTitleView.swift in Sources */,
 				EA786997220030E7003AC4CF /* LFLogTool.swift in Sources */,
 				EA5A3D5B22028F8D0093B886 /* DNSPageContentView.swift in Sources */,
 				EA5A3D64220290250093B886 /* UIColor+LFTool.swift in Sources */,
 				EA786995220030A1003AC4CF /* LFTrendCalculate.swift in Sources */,
 				EA9C41822216CD1900B47822 /* LFRoadInputParamModel.swift in Sources */,
+				EA9C418E2217B9B300B47822 /* LFRoadAskTipView.swift in Sources */,
+				EA9C418A2217B95300B47822 /* LFRoadChartNumLayout.swift in Sources */,
 				EA5A3D722202D21F0093B886 /* LFNumTrendIssuseTableViewCell.swift in Sources */,
 				EA5A3D5D22028F8D0093B886 /* DNSPageView.swift in Sources */,
 				EA78699A22003697003AC4CF /* LFURLProtocol.swift in Sources */,
