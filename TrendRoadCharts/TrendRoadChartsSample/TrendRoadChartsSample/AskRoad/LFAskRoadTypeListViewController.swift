@@ -13,15 +13,15 @@ class LFAskRoadTypeListViewController: UIViewController,UITableViewDataSource,UI
     
 
     lazy var tableView: UITableView = {()->UITableView in
-        let tableView = UITableView(frame: CGRect.zero, style: .plain)
+        let tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.red
+        tableView.backgroundColor = UIColor.white
         return tableView
     }()
-    var historyList: [AnyObject]?
+    var historyList: [[String:AnyObject]]?
     private var dataList: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,17 @@ class LFAskRoadTypeListViewController: UIViewController,UITableViewDataSource,UI
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataList.count
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
+        return 10
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: tableView.lf_width, height: 10))
+        return header
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
         return 40
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,6 +69,7 @@ class LFAskRoadTypeListViewController: UIViewController,UITableViewDataSource,UI
             tableView.deselectRow(at: indexPath, animated: true)
         }
         let askRoadVC = LFAskRoad1ViewController()
+        askRoadVC.dataList = self.historyList ?? []
         self.showAskVC(askRoadVC: askRoadVC)
     }
     

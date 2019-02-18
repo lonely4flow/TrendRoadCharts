@@ -43,7 +43,7 @@ class LFRoadChartCollectionViewCell: UICollectionViewCell {
     var isLastRow: Bool = false /*是否是最后一行，只有最有一行才会在底侧画一条分割线*/
     
     var isAskRoadCell: Bool = false {
-        didSet (newValue){
+        didSet {
             self.stopOpacityAnim()
             self.startOpacityAnim()
         }
@@ -98,7 +98,7 @@ class LFRoadChartCollectionViewCell: UICollectionViewCell {
             let rect = CGRect(x: margin, y: margin, width: self.cellItemSize.width-margin*2, height: self.cellItemSize.height-margin*2)
             LFDrawTool.lf_drawCircle(rect: rect, bgColor: self.bgColor, context: context,lineWidth: 2,isHellow: true)
         case .solidCircle:
-            // 画空心圆
+            // 画实心圆
             let margin: CGFloat = 2
             let rect = CGRect(x: margin, y: margin, width: self.cellItemSize.width-margin*2, height: self.cellItemSize.height-margin*2)
             LFDrawTool.lf_drawCircle(rect: rect, bgColor: self.bgColor, context: context)
@@ -156,19 +156,19 @@ class LFRoadChartCollectionViewCell: UICollectionViewCell {
                         // 上侧的线
                         let x1: CGFloat = 0
                         let y1: CGFloat = height-CGFloat(middelIndex-i)*dis
-                        let startPoint = CGPoint(x: x1, y: y1)
+                        let startPoint = CGPoint(x: x1+2, y: y1-2)
                         let y2: CGFloat = 0
                         let x2: CGFloat = (y1/height)*width
-                        let endPoint = CGPoint(x: x2, y: y2)
+                        let endPoint = CGPoint(x: x2-2, y: y2+2)
                         LFDrawTool.lf_drawLine(startPoint: startPoint, endPoint: endPoint, lineColor: self.heCountColor, lineWith: 1.5, context: context)
                     }else{
                         // 下侧的线
                         let y2: CGFloat = CGFloat(i-middelIndex+1)*dis
                         let x2: CGFloat = width
-                        let endPoint = CGPoint(x: x2, y: y2)
+                        let endPoint = CGPoint(x: x2-2, y: y2+2)
                         let x1: CGFloat = y2/height*width
                         let y1: CGFloat = height
-                        let startPoint = CGPoint(x: x1, y: y1)
+                        let startPoint = CGPoint(x: x1+2, y: y1-2)
                         
                         LFDrawTool.lf_drawLine(startPoint: startPoint, endPoint: endPoint, lineColor: self.heCountColor, lineWith: 1.5, context: context)
                     }
@@ -180,29 +180,29 @@ class LFRoadChartCollectionViewCell: UICollectionViewCell {
                         // 上侧的线
                         let x1: CGFloat = 0
                         let y1: CGFloat = height-CGFloat(middelIndex-i)*dis
-                        let startPoint = CGPoint(x: x1, y: y1)
+                        let startPoint = CGPoint(x: x1+2, y: y1-2)
                         let y2: CGFloat = 0
                         let x2: CGFloat = (y1/height)*width
-                        let endPoint = CGPoint(x: x2, y: y2)
+                        let endPoint = CGPoint(x: x2-2, y: y2+2)
                         LFDrawTool.lf_drawLine(startPoint: startPoint, endPoint: endPoint, lineColor: self.heCountColor, lineWith: 1.5, context: context)
                     }else if i == middelIndex {
                         // 中间的线
                         let x1: CGFloat = 0
                         let y1: CGFloat = height
-                        let startPoint = CGPoint(x: x1, y: y1)
+                        let startPoint = CGPoint(x: x1+2, y: y1-2)
                         let y2: CGFloat = 0
                         let x2: CGFloat = width
-                        let endPoint = CGPoint(x: x2, y: y2)
+                        let endPoint = CGPoint(x: x2-2, y: y2+2)
                         LFDrawTool.lf_drawLine(startPoint: startPoint, endPoint: endPoint, lineColor: self.heCountColor, lineWith: 1.5, context: context)
                     }
                     else{
                         // 下侧的线
                         let y2: CGFloat = CGFloat(i-middelIndex)*dis
                         let x2: CGFloat = width
-                        let endPoint = CGPoint(x: x2, y: y2)
+                        let endPoint = CGPoint(x: x2-2, y: y2+2)
                         let x1: CGFloat = y2/height*width
                         let y1: CGFloat = height
-                        let startPoint = CGPoint(x: x1, y: y1)
+                        let startPoint = CGPoint(x: x1+2, y: y1-2)
                         
                         LFDrawTool.lf_drawLine(startPoint: startPoint, endPoint: endPoint, lineColor: self.heCountColor, lineWith: 1.5, context: context)
                     }

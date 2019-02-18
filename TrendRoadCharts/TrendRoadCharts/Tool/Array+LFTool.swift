@@ -8,17 +8,18 @@
 
 import Foundation
 extension Array {
-    public func lf_addObj(count: Int,obj:AnyObject) -> Void
+    public mutating func lf_addObj(count: Int,obj:AnyObject) -> Void
     {
         var list: [AnyObject] = self as [AnyObject]
-        for _ in 0...count {
+        for _ in 0..<count {
             list.append(obj)
         }
+        self = list as! Array<Element>
     }
     public static func lf_fillObj(count: Int, obj:AnyObject) -> [AnyObject]
     {
         var list: [AnyObject] = []
-        for _ in 0...count {
+        for _ in 0..<count {
             list.append(obj)
         }
         return list
@@ -110,5 +111,22 @@ extension Array {
         return nil
     }
     
-    
+    var lf_last: AnyObject? {
+        get {
+            if self.count > 0 {
+                return self.last as AnyObject
+            }else{
+                return nil
+            }
+        }
+        set {
+            if newValue != nil {
+                if self.count > 0 {
+                    self[self.count-1] = newValue as! Element
+                }else{
+                    self.append(newValue as! Element)
+                }
+            }
+        }
+    }
 }

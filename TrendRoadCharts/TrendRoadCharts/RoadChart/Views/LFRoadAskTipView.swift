@@ -68,18 +68,18 @@ fileprivate class LFRoadAskTipThreeView : UIView
 class LFRoadAskTipView: UIView {
 
     var title: String? {
-        didSet(newValue) {
+        didSet {
             
         }
     }
     var bgColor: UIColor? {
-        didSet(newValue){
+        didSet{
             self.colorLayer?.backgroundColor = self.bgColor?.cgColor
             self.colorLayer?.borderColor = self.bgColor?.cgColor
         }
     }
     var darkColor: UIColor? {
-        didSet(newValue) {
+        didSet {
             self.darkView?.backgroundColor = self.darkColor
         }
     }

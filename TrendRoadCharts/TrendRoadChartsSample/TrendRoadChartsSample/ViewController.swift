@@ -41,13 +41,23 @@ class ViewController: UIViewController,UIWebViewDelegate,UITableViewDataSource,U
             self.requestWebData()
         }
     }
-    
     // MARK: 展示问路图
     @objc func showRoadCharts()
     {
-        let vc = LFAskRoadTypeListViewController()
-        vc.historyList = self.dataList as [AnyObject]
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = LFAskRoadTypeListViewController()
+//        vc.historyList = self.dataList as [[String:AnyObject]]
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+        let askRoadVC = LFAskRoad1ViewController()
+        askRoadVC.dataList = self.dataList as [[String : AnyObject]]
+        
+        let fromVC = self.navigationController
+        fromVC?.definesPresentationContext = true
+        
+        askRoadVC.view.backgroundColor = UIColor(red: 154/255.0, green: 155/255.0, blue: 157/255.0, alpha: 0.4)
+        askRoadVC.modalPresentationStyle = .overCurrentContext
+        fromVC?.present(askRoadVC, animated: false, completion: nil)
+        
     }
     // MARK: 展示走势图
     @objc func showTrendCharts()

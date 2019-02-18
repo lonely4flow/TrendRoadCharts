@@ -34,8 +34,8 @@ class LFRoadChartNumLayout: UICollectionViewLayout {
     // 设置内容区域的大小
     override var collectionViewContentSize: CGSize{
         let colCount = self.collectionView!.numberOfSections
-        let width = CGFloat(self.colCount) * self.itemSize.width
-        let height = CGFloat(colCount) * self.itemSize.height
+        let width = CGFloat(colCount) * self.itemSize.width
+        let height = CGFloat(self.rowCount) * self.itemSize.height
         return CGSize(width: width, height: height)
     }
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {

@@ -9,16 +9,16 @@
 import Foundation
 public enum LFRoadCalculateHeType {
     
-    case LFRoadCalculateHeTypeCombine // 和与非和的数据展示在一格里
-    case LFRoadCalculateHeTypeNextRow // 和展示在同一列的新的一行里
-    case LFRoadCalculateHeTypeNextCol // 和展示在新的一列里
+    case combine // 和与非和的数据展示在一格里
+    case nextRow // 和展示在同一列的新的一行里
+    case nextCol // 和展示在新的一列里
     
 }
 public enum LFRoadCalculateBottomThreeType {
     
-    case LFRoadCalculateBottomThreeTypeBigEyeRoad // 大眼路
-    case LFRoadCalculateBottomThreeTypeSmallRoad // 小路
-    case LFRoadCalculateBottomThreeTypeYueYouRoad // 曱甴路
+    case bigEyeRoad // 大眼路
+    case smallRoad // 小路
+    case yueYouRoad // 曱甴路
     
 }
 
@@ -83,9 +83,9 @@ class LFRoadCalculateTool: NSObject {
     fileprivate class func calculateInputListToBigRaodOriginList(inputList: [LFRoadInputParamModel],heType:LFRoadCalculateHeType) -> [[LFRoadOutputParamModel]]
     {
         switch heType {
-        case .LFRoadCalculateHeTypeNextRow:
+        case .nextRow:
             return LFRoadCalculateTool.calculateInputListToBigRaodOriginListWithHeNextRow(inputList: inputList)
-        case .LFRoadCalculateHeTypeNextCol:
+        case .nextCol:
             return LFRoadCalculateTool.calculateInputListToBigRaodOriginListWithHeNextCol(inputList: inputList)
         default:
             return LFRoadCalculateTool.calculateInputListToBigRaodOriginListWithHeCombine(inputList: inputList)
@@ -120,6 +120,8 @@ class LFRoadCalculateTool: NSObject {
                 if "和" == newOutputModel.showTxt {
                     // 如果与上一次添加的一样，则继续在该列添加
                     lastColList.append(newOutputModel)
+                    // swift数组里append后后自动变成不可变，需要重新赋值
+                    outputOriginList.lf_last_list = lastColList
                 }else{
                     // 计算上一次添加的那一列里非和的数据
                     var lastNotHeIndex = lastColList.count-1
@@ -133,10 +135,15 @@ class LFRoadCalculateTool: NSObject {
                     if "和" == colShowTxt {
                         // 这一列里全是和的情况，继续在这一列里添加
                         lastColList.append(newOutputModel)
+                        // swift数组里append后后自动变成不可变，需要重新赋值
+                        outputOriginList.lf_last_list = lastColList
                     }else{
                         if colShowTxt == newOutputModel.showTxt {
                             // 最新的内容和这一列的非和的展示内容一致，继续在这一列里添加
                             lastColList.append(newOutputModel)
+                            // swift数组里append后后自动变成不可变，需要重新赋值
+                            outputOriginList.lf_last_list = lastColList
+                            
                         }else{
                             // 最新的内容和这一列的非和的展示内容不一致，重新添加一列
                             var newColList: [LFRoadOutputParamModel] = []
@@ -181,12 +188,15 @@ class LFRoadCalculateTool: NSObject {
                 if oldOutputModel.showTxt == newOutputModel.showTxt {
                     // 如果与上一次添加的一样，则继续在该列添加
                     lastColList.append(newOutputModel)
+                    // swift数组里append后后自动变成不可变，需要重新赋值
+                    outputOriginList.lf_last_list = lastColList
                 }else{
                     // 最新的内容和这一列的非和的展示内容不一致，重新添加一列
                     var newColList: [LFRoadOutputParamModel] = []
                     newColList.append(newOutputModel)
                     outputOriginList.append(newColList)
                 }
+                
             }
             
             
@@ -235,6 +245,8 @@ class LFRoadCalculateTool: NSObject {
                         if oldOutputModel.showTxt == newOutputModel.showTxt {
                             // 与上一次添加的属于同一个类型，继续在该列添加数据
                             lastColList.append(newOutputModel)
+                            // swift数组里append后后自动变成不可变，需要重新赋值
+                            outputOriginList.lf_last_list = lastColList
                         }else{
                             // 与上一列数据不一致，新添加一列
                             var newColList: [LFRoadOutputParamModel] = []
@@ -258,10 +270,10 @@ class LFRoadCalculateTool: NSObject {
     fileprivate class func calculateOutputOriginListToOutputShowList(outputOriginList: [[LFRoadOutputParamModel]]) -> [[AnyObject]]
     {
         // 大路图上的n列的数组，每列有6行
-        let outputShowList: [[AnyObject]] = []
+        var outputShowList: [[AnyObject]] = []
         for originColList in outputOriginList {
             // 从后往前找，找到第一行时空数据的列
-            var lastFirstRowEmptyColList = outputShowList.lf_road_findFirstRowEmptyColList()
+            var (lastFirstRowEmptyColList,lastFirstRowEmptyColIndex) = outputShowList.lf_road_findFirstRowEmptyColList()
             let maxEmptyIndex = lastFirstRowEmptyColList.lf_road_findMaxEmptyIndex()
 
             for rowIndex in 0..<originColList.count
@@ -270,11 +282,13 @@ class LFRoadCalculateTool: NSObject {
                 if rowIndex <= maxEmptyIndex
                 {
                     lastFirstRowEmptyColList[rowIndex] = outputModel
+                    outputShowList[lastFirstRowEmptyColIndex] = lastFirstRowEmptyColList
                 }
                 else{
                    // 要长龙折行展示
-                    var nextColList: [AnyObject] = outputShowList.lf_road_nextColListWithRowIndex(rowIndex: maxEmptyIndex)
+                    var (nextColList,nextColIndex) = outputShowList.lf_road_nextColListWithRowIndex(rowIndex: maxEmptyIndex)
                     nextColList[maxEmptyIndex] = outputModel
+                    outputShowList[nextColIndex] = nextColList
                 }
             }
         }
@@ -282,7 +296,7 @@ class LFRoadCalculateTool: NSObject {
     }
     // MARK: - 盘珠路
     // MARK: - n列6行的盘珠路展示数据 Open
-    public class func calculateInputListToPanzhuShowList(inputList:[LFRoadInputParamModel],heType:LFRoadCalculateHeType,bottomThreeRoadType:LFRoadCalculateBottomThreeType,callback: ((_ showList: [[AnyObject]])-> Void)?) -> Operation
+    public class func calculateInputListToPanzhuShowList(inputList:[LFRoadInputParamModel],callback: ((_ showList: [[AnyObject]])-> Void)?) -> Operation
     {
         let operation: Operation = BlockOperation {
             let showList = LFRoadCalculateTool.calculateInputListToPanzhuRoadOutputShowList(inputList: inputList)
@@ -334,12 +348,14 @@ class LFRoadCalculateTool: NSObject {
             newOutputModel.inputModel = inputModel
             newOutputModel.heCount = 0
             lastColList.append(newOutputModel)
+            showList.lf_last_list = lastColList
             
         }
         // 对最后一列补全满足每列都6行
-        if let lastColList = showList.last {
+        if var lastColList = showList.last {
             let emptyCount: Int = 6-lastColList.count
             lastColList.lf_addObj(count:emptyCount,obj:NSNull())
+            showList.lf_last_list = lastColList
         }
         
         return showList
@@ -350,9 +366,9 @@ class LFRoadCalculateTool: NSObject {
     {
         let operation: Operation = BlockOperation {
             let bigRoadOriginList = LFRoadCalculateTool.calculateInputListToBigRaodOriginList(inputList: inputList, heType: heType)
-            let bigEyeRoadOriginList = LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:bigRoadOriginList,bottomThreeRoadType:.LFRoadCalculateBottomThreeTypeBigEyeRoad)
-            let smallRoadOriginList = LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:bigRoadOriginList,bottomThreeRoadType:.LFRoadCalculateBottomThreeTypeSmallRoad)
-            let yueYouRoadOriginList = LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:bigRoadOriginList,bottomThreeRoadType:.LFRoadCalculateBottomThreeTypeYueYouRoad)
+            let bigEyeRoadOriginList = LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:bigRoadOriginList,bottomThreeRoadType:.bigEyeRoad)
+            let smallRoadOriginList = LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:bigRoadOriginList,bottomThreeRoadType:.smallRoad)
+            let yueYouRoadOriginList = LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:bigRoadOriginList,bottomThreeRoadType:.yueYouRoad)
             
             if callback != nil {
                 // 在主线程执行回调
@@ -375,13 +391,13 @@ class LFRoadCalculateTool: NSObject {
         let operation: Operation = BlockOperation {
             let bigRoadOriginList = LFRoadCalculateTool.calculateInputListToBigRaodOriginList(inputList: inputList, heType: heType)
             
-            let bigEyeRoadOriginList = LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:bigRoadOriginList,bottomThreeRoadType:.LFRoadCalculateBottomThreeTypeBigEyeRoad)
+            let bigEyeRoadOriginList = LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:bigRoadOriginList,bottomThreeRoadType:.bigEyeRoad)
             let bigEyeRoadShowList = LFRoadCalculateTool.calculateOutputOriginListToOutputShowList(outputOriginList: bigEyeRoadOriginList)
             
-            let smallRoadOriginList = LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:bigRoadOriginList,bottomThreeRoadType:.LFRoadCalculateBottomThreeTypeSmallRoad)
+            let smallRoadOriginList = LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:bigRoadOriginList,bottomThreeRoadType:.smallRoad)
             let smallRoadShowList = LFRoadCalculateTool.calculateOutputOriginListToOutputShowList(outputOriginList: smallRoadOriginList)
             
-            let yueYouRoadOriginList = LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:bigRoadOriginList,bottomThreeRoadType:.LFRoadCalculateBottomThreeTypeYueYouRoad)
+            let yueYouRoadOriginList = LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:bigRoadOriginList,bottomThreeRoadType:.yueYouRoad)
             let yueYouRoadShowList = LFRoadCalculateTool.calculateOutputOriginListToOutputShowList(outputOriginList: yueYouRoadOriginList)
             
             if callback != nil {
@@ -446,9 +462,9 @@ class LFRoadCalculateTool: NSObject {
     fileprivate class func calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList:[[LFRoadOutputParamModel]],bottomThreeRoadType: LFRoadCalculateBottomThreeType) -> [[LFRoadOutputParamModel]]
     {
         switch bottomThreeRoadType {
-        case .LFRoadCalculateBottomThreeTypeBigEyeRoad:
+        case .bigEyeRoad:
             return LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList: bigRoadOriginList, startColNum: 1)
-        case .LFRoadCalculateBottomThreeTypeSmallRoad:
+        case .smallRoad:
             return LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList: bigRoadOriginList, startColNum: 2)
         default:
             return LFRoadCalculateTool.calculateBigRoadOriginListToBottomThreeOriginList(bigRoadOriginList: bigRoadOriginList, startColNum: 3)
@@ -480,6 +496,9 @@ class LFRoadCalculateTool: NSObject {
     {
         // https://666.d88agqj.com/aggame/rules/aggame/rule_home.html
         // https://youxi899.com/百家乐看路法下篇/
+        if startColNum >= bigRoadOriginList.count {
+            return []
+        }
         var inputList: [LFRoadInputParamModel] = []
         for colIndex in startColNum..<bigRoadOriginList.count {
             if bigRoadOriginList.count <= colIndex {
@@ -514,7 +533,7 @@ class LFRoadCalculateTool: NSObject {
                         let newInputModel: LFRoadInputParamModel = LFRoadInputParamModel()
                         let oldInputModel: LFRoadInputParamModel = outputModel.inputModel
                         newInputModel.originData = oldInputModel.originData
-                        newInputModel.beforeTransformTxt = LFRoadCalculateTool.combineTxts(beforeTxt: oldInputModel.beforeTransformTxt, afterTxt: sepBeforeAfter, sepBeforeAfter: oldInputModel.afterTransformTxt)
+                        newInputModel.beforeTransformTxt = LFRoadCalculateTool.combineTxts(beforeTxt: oldInputModel.beforeTransformTxt, afterTxt: oldInputModel.afterTransformTxt, sepBeforeAfter:sepBeforeAfter)
                         
                         newInputModel.isAskRoad = oldInputModel.isAskRoad
                         newInputModel.afterTransformTxt = "红"
@@ -524,7 +543,7 @@ class LFRoadCalculateTool: NSObject {
                         let newInputModel: LFRoadInputParamModel = LFRoadInputParamModel()
                         let oldInputModel: LFRoadInputParamModel = outputModel.inputModel
                         newInputModel.originData = oldInputModel.originData
-                        newInputModel.beforeTransformTxt = LFRoadCalculateTool.combineTxts(beforeTxt: oldInputModel.beforeTransformTxt, afterTxt: sepBeforeAfter, sepBeforeAfter: oldInputModel.afterTransformTxt)
+                        newInputModel.beforeTransformTxt = LFRoadCalculateTool.combineTxts(beforeTxt: oldInputModel.beforeTransformTxt, afterTxt: oldInputModel.afterTransformTxt, sepBeforeAfter:sepBeforeAfter)
                         newInputModel.isAskRoad = oldInputModel.isAskRoad
                         newInputModel.afterTransformTxt = "蓝";
                         inputList.append(newInputModel)
@@ -540,7 +559,7 @@ class LFRoadCalculateTool: NSObject {
                         let newInputModel: LFRoadInputParamModel = LFRoadInputParamModel()
                         let oldInputModel: LFRoadInputParamModel = outputModel.inputModel
                         newInputModel.originData = oldInputModel.originData;
-                        newInputModel.beforeTransformTxt = LFRoadCalculateTool.combineTxts(beforeTxt: oldInputModel.beforeTransformTxt, afterTxt: sepBeforeAfter, sepBeforeAfter: oldInputModel.afterTransformTxt)
+                        newInputModel.beforeTransformTxt = LFRoadCalculateTool.combineTxts(beforeTxt: oldInputModel.beforeTransformTxt, afterTxt: oldInputModel.afterTransformTxt, sepBeforeAfter:sepBeforeAfter)
                         newInputModel.isAskRoad = oldInputModel.isAskRoad
                         newInputModel.afterTransformTxt = "蓝"
                         inputList.append(newInputModel)
@@ -549,7 +568,7 @@ class LFRoadCalculateTool: NSObject {
                         let newInputModel: LFRoadInputParamModel = LFRoadInputParamModel()
                         let oldInputModel: LFRoadInputParamModel = outputModel.inputModel
                         newInputModel.originData = oldInputModel.originData
-                        newInputModel.beforeTransformTxt = LFRoadCalculateTool.combineTxts(beforeTxt: oldInputModel.beforeTransformTxt, afterTxt: sepBeforeAfter, sepBeforeAfter: oldInputModel.afterTransformTxt)
+                        newInputModel.beforeTransformTxt = LFRoadCalculateTool.combineTxts(beforeTxt: oldInputModel.beforeTransformTxt, afterTxt: oldInputModel.afterTransformTxt, sepBeforeAfter:sepBeforeAfter)
                         newInputModel.isAskRoad = oldInputModel.isAskRoad
                         newInputModel.afterTransformTxt = "红"
                         inputList.append(newInputModel)
@@ -562,11 +581,13 @@ class LFRoadCalculateTool: NSObject {
     // MARK: - 组合文字 Private
     fileprivate class func combineTxts(beforeTxt: String?,afterTxt:String,sepBeforeAfter: String) -> String
     {
+        var combineTxt: String = ""
         if beforeTxt != nil {
-            return  beforeTxt!+sepBeforeAfter+afterTxt
+            combineTxt = beforeTxt!+sepBeforeAfter+afterTxt
         }else{
-            return  "nil"+sepBeforeAfter+afterTxt
+            combineTxt = "nil"+sepBeforeAfter+afterTxt
         }
+        return combineTxt
     }
 }
 
@@ -588,7 +609,7 @@ extension Array {
         }
         return maxEmptyIndex
     }
-    fileprivate func lf_road_findFirstRowEmptyColList() -> [AnyObject]
+    fileprivate mutating func lf_road_findFirstRowEmptyColList() -> ([AnyObject],Int)
     {
         var showList: [[AnyObject]] = self as! [[AnyObject]]
         if showList.count == 0 || !showList.last!.first!.isKind(of: NSNull.classForCoder()) {
@@ -596,7 +617,8 @@ extension Array {
             // 或展示数据的最后一列的第一行不是null，也就是最后一列的第一行有正式数据，添加新添加一列
             let newColList: [AnyObject] = Array<Any>.lf_fillObj(count:6,obj:NSNull())
             showList.append(newColList)
-            return newColList
+            self = showList as! Array<Element>
+            return (newColList,showList.count-1)
         }else {
             // 最后一期的第一行时空数据，则表明有空列，找到最后一个非空列
             var lastNotEmptyColIndex: Int = showList.count-2
@@ -607,17 +629,18 @@ extension Array {
             }
             // 最后一列非空数据，则取最后一列非空数据的后一列
             let lastEmptyList = showList[lastNotEmptyColIndex+1]
-            return lastEmptyList
+            return (lastEmptyList,lastNotEmptyColIndex+1)
         }
     }
-    fileprivate func lf_road_nextColListWithRowIndex(rowIndex: Int) -> [AnyObject]
+    fileprivate mutating func lf_road_nextColListWithRowIndex(rowIndex: Int) -> ([AnyObject],Int)
     {
         var showList: [[AnyObject]] = self as! [[AnyObject]]
         if !showList.last![rowIndex].isKind(of: NSNull.classForCoder()) {
             // 最后一列都不是空的，则需要新添加一列
             let newColList: [AnyObject] = Array<Any>.lf_fillObj(count:6,obj:NSNull())
             showList.append(newColList)
-            return newColList
+            self = showList as! Array<Element>
+            return (newColList,showList.count-1)
         }else{
             // 最后一列的这一行是空的，则找到最后一个不为空的，然后找到这列旁边的一列
             var lastNotEmptyColIndex: Int = showList.count-2
@@ -628,7 +651,25 @@ extension Array {
                 colList = showList[lastNotEmptyColIndex]
                 rowObj = colList[rowIndex]
             }
-            return showList[lastNotEmptyColIndex+1]
+            return (showList[lastNotEmptyColIndex+1],lastNotEmptyColIndex+1)
+        }
+    }
+    fileprivate var lf_last_list: [AnyObject]? {
+        get {
+            if self.count > 0 {
+                return self.last as? [AnyObject]
+            }else{
+                return nil
+            }
+        }
+        set {
+            if newValue != nil {
+                if self.count > 0 {
+                    self[self.count-1] = newValue as! Element
+                }else{
+                    self.append(newValue as! Element)
+                }
+            }
         }
     }
 }

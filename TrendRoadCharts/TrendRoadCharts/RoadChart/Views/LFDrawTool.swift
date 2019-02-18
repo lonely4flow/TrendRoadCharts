@@ -24,14 +24,16 @@ class LFDrawTool: NSObject {
     // 画圆
      static func lf_drawCircle(rect:CGRect,bgColor: UIColor,context:CGContext?,lineWidth:CGFloat=1,isHellow:Bool=false) -> Void
     {
-        context?.setFillColor(bgColor.cgColor)
+        
         context?.addEllipse(in: rect)
         if isHellow {
             // 画空心圆
+            context?.setStrokeColor(bgColor.cgColor)
             context?.setLineWidth(lineWidth)
             context?.drawPath(using: .stroke)
         }else{
             // 画实心圆
+            context?.setFillColor(bgColor.cgColor)
             context?.drawPath(using: .fill)
         }
     }

@@ -17,17 +17,17 @@ typealias DrawTrendLineBlock = (_ omiList:[LFTrendOutputOmiRowModel])->(LFTrendD
 class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
 
     var mapClosure: MapTrendInputBlock? {
-        didSet(newValue){
+        didSet{
             self.calculateDatas()
         }
     }
     var drawLineClosures: [DrawTrendLineBlock]?{
-        didSet(newValue){
+        didSet{
             self.drawLines()
         }
     }
     var dataList: [[String:Any]] = [] {
-        didSet(newValue){
+        didSet{
             self.calculateDatas()
         }
     }
@@ -47,7 +47,7 @@ class LFNumTrendViewController: UIViewController,UITableViewDataSource,UITableVi
                 self.itemSize = CGSize(width: width, height: height)
             }
         }
-        didSet(newValue){
+        didSet{
             self.setupCollectionHeaderData()
             self.layout.colCount = self.colList.count
             self.layout.itemSize = self.itemSize
