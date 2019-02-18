@@ -15,6 +15,7 @@ class LFAskRoadItemModel: NSObject
     var askTitles:[String]?
     var transformClosure: LFRoadTransformInputModelClosure?
     var cellFillClosure: LFRoadChartFillCellClosure?
+    var isShowBigRoadTxt: Bool = false
 }
 class LFAskRoadCategoryModel: NSObject {
     var title: String?

@@ -47,7 +47,6 @@
 		EA9C418E2217B9B300B47822 /* LFRoadAskTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C418D2217B9B300B47822 /* LFRoadAskTipView.swift */; };
 		EA9C41902217F3CC00B47822 /* LFDrawTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C418F2217F3CC00B47822 /* LFDrawTool.swift */; };
 		EA9C419322181F8E00B47822 /* LFAskRoad1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C419222181F8E00B47822 /* LFAskRoad1ViewController.swift */; };
-		EA9C419522181FE000B47822 /* LFAskRoadTypeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C419422181FE000B47822 /* LFAskRoadTypeListViewController.swift */; };
 		EA9C41972218256000B47822 /* LFAskRoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C41962218256000B47822 /* LFAskRoadViewController.swift */; };
 		EA9C419922182A7000B47822 /* UIView+LFRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C419822182A7000B47822 /* UIView+LFRect.swift */; };
 		EA9C419B221832FF00B47822 /* LFAskRoadCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C419A221832FF00B47822 /* LFAskRoadCategoryModel.swift */; };
@@ -133,7 +132,6 @@
 		EA9C418D2217B9B300B47822 /* LFRoadAskTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRoadAskTipView.swift; sourceTree = "<group>"; };
 		EA9C418F2217F3CC00B47822 /* LFDrawTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFDrawTool.swift; sourceTree = "<group>"; };
 		EA9C419222181F8E00B47822 /* LFAskRoad1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFAskRoad1ViewController.swift; sourceTree = "<group>"; };
-		EA9C419422181FE000B47822 /* LFAskRoadTypeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFAskRoadTypeListViewController.swift; sourceTree = "<group>"; };
 		EA9C41962218256000B47822 /* LFAskRoadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFAskRoadViewController.swift; sourceTree = "<group>"; };
 		EA9C419822182A7000B47822 /* UIView+LFRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+LFRect.swift"; sourceTree = "<group>"; };
 		EA9C419A221832FF00B47822 /* LFAskRoadCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFAskRoadCategoryModel.swift; sourceTree = "<group>"; };
@@ -390,7 +388,6 @@
 		EA9C419122181F6D00B47822 /* AskRoad */ = {
 			isa = PBXGroup;
 			children = (
-				EA9C419422181FE000B47822 /* LFAskRoadTypeListViewController.swift */,
 				EA9C41962218256000B47822 /* LFAskRoadViewController.swift */,
 				EA9C419222181F8E00B47822 /* LFAskRoad1ViewController.swift */,
 				EA9C419A221832FF00B47822 /* LFAskRoadCategoryModel.swift */,
@@ -647,7 +644,6 @@
 				EA5A3D5E22028F8D0093B886 /* DNSPageTitleView.swift in Sources */,
 				EA9C419922182A7000B47822 /* UIView+LFRect.swift in Sources */,
 				EA786997220030E7003AC4CF /* LFLogTool.swift in Sources */,
-				EA9C419522181FE000B47822 /* LFAskRoadTypeListViewController.swift in Sources */,
 				EA5A3D5B22028F8D0093B886 /* DNSPageContentView.swift in Sources */,
 				EA5A3D64220290250093B886 /* UIColor+LFTool.swift in Sources */,
 				EA786995220030A1003AC4CF /* LFTrendCalculate.swift in Sources */,

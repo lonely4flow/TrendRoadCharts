@@ -304,7 +304,10 @@ class LFAskRoadViewController: UIViewController {
             let categoryModel = self.categoryList[index]
             self.categoryBtn?.setTitle(categoryModel.title!, for: .normal)
             self.selectCategeryIndex = index
+            self.selectItemIndex = 0
             self.setupItems()
+            self.itemBtnCliked(btn: nil)
+            
         }, userDismissDropViewCallBack: {
             print("user cancel")
         })
@@ -345,6 +348,11 @@ class LFAskRoadViewController: UIViewController {
         let categoryModel = self.categoryList[self.selectCategeryIndex]
         let itemModel = categoryModel.itemList[self.selectItemIndex];
         self.selectItemModel = itemModel;
+        
+        self.bigRoadView.isShowTxt = self.selectItemModel?.isShowBigRoadTxt ?? false
+        self.bigEyeRoadView.isHidden = !self.selectItemModel!.isShowBottomThreeRoad
+        self.smallRoadView.isHidden = !self.selectItemModel!.isShowBottomThreeRoad
+        self.yueYouRoadView.isHidden = !self.selectItemModel!.isShowBottomThreeRoad
         
 //        // 判断是否显示下三路图
 //
